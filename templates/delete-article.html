@@ -1,0 +1,21 @@
+<!--delete-article.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<h1>Delete product</h1>
+
+
+<div class="panel panel-default col-sm-12">
+  <div class="panel-body">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+      </div>
+      <button id="buttonArticleDelete" type="submit" class="btn btn-danger">Submit</button>
+  </div>
+</div>  
+
+    
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

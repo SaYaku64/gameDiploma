@@ -1,0 +1,106 @@
+<!--menu.html-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+      <!-- ================= -->
+      <!-- Logo link -->
+      <!-- ================= -->
+    <a class="navbar-brand" href="/"><h3>
+      <b class="text-primary">NULES</b><b class="text-success"> Garden </b><b class="text-warning">Shop</b>
+    </h3></a>
+
+    <!-- Objects next to logo (discussions and signings) -->
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+      <!-- ================= -->
+      <!-- Assortiment link -->
+      <!-- ================= -->
+      <li class="navbar-header"><h3>
+        <a class="navbar-brand" href="/assortiment">
+          Assortiment
+        </a> </h3>
+      </li>
+
+
+        <!--Display this link only when the user is logged in-->
+        <li class="navbar-header">
+          <a class="navbar-brand" href="/article/create">Add product</a>
+        </li>
+        <li class="navbar-header">
+          <a class="navbar-brand" href="/article/delete">Delete product</a>
+        </li>
+        <li class="navbar-header">
+          <a class="navbar-brand" href="/article/edit">Edit product</a>
+        </li>
+
+      <li class="navbar-header"><h3>
+        <a href="#" class="h5 btn btn-primary" data-toggle="modal" data-target="#busketShowBackdrop">Кошик</a>
+      </li>
+      <!-- Modal window comment-->
+      <div class="modal fade" id="busketShowBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="busketShow">Кошик</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="panel panel-default col-sm-12">
+                <div class="panel-body">
+                    <div class="form-group">
+                      {{range .busket }}
+                      <p>{{.Title}} - {{.Amount}}</p>
+                      <p>Ціна: {{.Price}}</p>
+                      <hr>
+                      {{end}}
+                    </div>
+                    <button type="submit" class="btn btn-danger" id="clearBusket">Clear busket</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ================= -->
+      <!-- FAQ link -->
+      <!-- ================= -->
+      <!-- <li class="navbar-header"><h3>
+        <a class="navbar-brand" href="/faq">
+          F.A.Q.
+        </a> </h3>
+      </li> -->
+
+      <!-- ================= -->
+      <!-- Creating the article -->
+      <!-- ================= -->
+
+
+      <!-- ================= -->
+      <!-- Admin panel -->
+      <!-- ================= -->
+      <!-- <li class="navbar-header">
+        <a class="navbar-brand" href="/admin/panel">Admin Panel</a>
+      </li> -->
+      
+    </ul>
+  </div>
+</nav>
+<p id="errorMenu"></p>
+
+<!--If there's an error, display the error-->
+{{ if .ErrorTitle}}
+<p class="bg-danger dropdown-item text-white font-weight-bold">
+  {{.ErrorTitle}}: {{.ErrorMessage}}
+</p>
+{{end}}
+
+
+
+
+<div class="container">
+
