@@ -2,14 +2,76 @@
 
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
+    <style>
+    .row {
+      display: -ms-flexbox; /* IE 10 */
+      display: flex;
+      -ms-flex-wrap: wrap; /* IE 10 */
+      flex-wrap: wrap;
+      padding: 0 4px;
+    }
+    .column {
+      -ms-flex: 10%; /* IE 10 */
+      flex: 10%;
+      padding: 0 1px;
+    }
+    .column img {
+      margin: 1px;
+      vertical-align: middle;
+    }
+    </style>
 
-<h1>Welcome to NULES garden shop!</h1>
-<br><br>
-<h3>
-<p>Here you can choose many garden products!</p>
-</h3>
-<iframe width="520" height="400" frameborder="2" scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas" src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=%20Kiyv+()&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe> <a href='http://maps-generator.com/ru'>Maps-Generator.com/ru</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=eb33cb484f40e092b95340e1be30b86af72c6ca9'></script>
-<br><br>
-<h2>Enjoy this!</h2>
-<!--Embed the footer.html template at this location-->
+    <div class="row">
+        <div class="column">
+        {{ range .tiles0 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles1 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles2 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles3 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles4 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles5 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles6 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles7 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles8 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+        <div class="column">
+        {{ range .tiles9 }}
+        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
+        {{ end }}
+        </div>
+    </div>
+
 {{ template "footer.html" .}}

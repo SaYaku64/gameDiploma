@@ -19,6 +19,8 @@ var Client = connDB()
 
 func main() {
 
+	FillSlice()
+
 	gin.SetMode(gin.ReleaseMode)
 
 	router = gin.Default()

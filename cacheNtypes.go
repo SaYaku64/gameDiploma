@@ -18,20 +18,6 @@ type user struct {
 	Token       token  `json:"token"`
 }
 
-type article struct {
-	ID      int    `json:"id"`
-	Title   string `json:"title"`
-	Content string `json:"content"`
-	Picture string `json:"picture"`
-	Price   string `json:"price"`
-}
-
-type comment struct {
-	ComTime    string `json:"comtime"`
-	ComContent string `json:"comcontent"`
-	ComName    string `json:"comname"`
-}
-
 type activeUsers struct {
 	sync.RWMutex
 	m map[string]user
@@ -41,13 +27,3 @@ type activeUsers struct {
 var ActiveUsers = activeUsers{
 	m: make(map[string]user),
 }
-
-var Busket = map[string]int{}
-
-type bskt struct {
-	Title  string `json:"title"`
-	Amount int    `json:"amount"`
-	Price  int    `json:"price"`
-}
-
-var BusketSlice []bskt
