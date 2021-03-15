@@ -19,8 +19,6 @@ var Client = connDB()
 
 func main() {
 
-	FillSlice()
-
 	gin.SetMode(gin.ReleaseMode)
 
 	router = gin.Default()
@@ -39,7 +37,7 @@ func main() {
 	disconnDB(Client)
 }
 
-func render(c *gin.Context, data gin.H, templateName string) {
+func render(c *gin.Context, templateName string, data gin.H) {
 	loggedInInterface, ok := c.Get("is_logged_in")
 	if ok != true {
 		log.Println("Error in getting 'is_logged_in' parameter")

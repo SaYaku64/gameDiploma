@@ -1,79 +1,44 @@
 <!--menu.html-->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+  <a class="navbar-brand" href="/"><h3>
+    <b class="text-primary">NULE</b><b class="text-success">S</b><b class="text-warning">andbox</b>
+  </h3></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <!-- ================= -->
-      <!-- Logo link -->
-      <!-- ================= -->
-    <a class="navbar-brand" href="/"><h3>
-      <b class="text-primary">NULE</b><b class="text-success">S</b><b class="text-warning">andbox</b>
-    </h3></a>
-
-    <!-- Objects next to logo (discussions and signings) -->
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-      <!-- ================= -->
-      <!-- Assortiment link -->
-      <!-- ================= -->
-      <!-- <li class="navbar-header"><h3>
-        <a class="navbar-brand" href="/assortiment">
-          Assortiment
-        </a> </h3>
-      </li> -->
-
-
-        <!--Display this link only when the user is logged in-->
-        <!-- <li class="navbar-header">
-          <a class="navbar-brand" href="/article/create">Add product</a>
-        </li>
-        <li class="navbar-header">
-          <a class="navbar-brand" href="/article/delete">Delete product</a>
-        </li>
-        <li class="navbar-header">
-          <a class="navbar-brand" href="/article/edit">Edit product</a>
-        </li> -->
-
-      <!-- <li class="navbar-header"><h3>
-        <a href="#" class="h5 btn btn-primary" data-toggle="modal" data-target="#busketShowBackdrop">Кошик</a>
+  <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-      <div class="modal fade" id="busketShowBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="busketShow">Кошик</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="panel panel-default col-sm-12">
-                <div class="panel-body">
-                    <div class="form-group">
-                      {{range .busket }}
-                      <p>{{.Title}} - {{.Amount}}</p>
-                      <p>Ціна: {{.Price}}</p>
-                      <hr>
-                      {{end}}
-                    </div>
-                    <button type="submit" class="btn btn-danger" id="clearBusket">Clear busket</button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
         </div>
-      </div> -->
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
     </ul>
-  </div>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div> -->
 </nav>
-<p id="errorMenu"></p>
 
-<!--If there's an error, display the error-->
-{{ if .ErrorTitle}}
-<p class="bg-danger dropdown-item text-white font-weight-bold">
-  {{.ErrorTitle}}: {{.ErrorMessage}}
-</p>
-{{end}}
+<p id="errorMenu"></p>
 
 <div class="container">
 

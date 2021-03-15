@@ -2,76 +2,9 @@
 
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
-    <style>
-    .row {
-      display: -ms-flexbox; /* IE 10 */
-      display: flex;
-      -ms-flex-wrap: wrap; /* IE 10 */
-      flex-wrap: wrap;
-      padding: 0 4px;
-    }
-    .column {
-      -ms-flex: 10%; /* IE 10 */
-      flex: 10%;
-      padding: 0 1px;
-    }
-    .column img {
-      margin: 1px;
-      vertical-align: middle;
-    }
-    </style>
 
-    <div class="row">
-        <div class="column">
-        {{ range .tiles0 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles1 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles2 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles3 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles4 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles5 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles6 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles7 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles8 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
-        <div class="column">
-        {{ range .tiles9 }}
-        <img src="/static/pics/tiles/{{ .Count }}.jpg" class="tilePicture" data-id="{{ .Count }}" style="width:100%">
-        {{ end }}
-        </div>
+    <div class="map">
+      <img src="/static/pics/map.png" class="tilePicture" id="mainMap" style="width:100%">
     </div>
 
 {{ template "footer.html" .}}

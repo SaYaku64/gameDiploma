@@ -13,6 +13,8 @@ func initializeRoutes() {
 	router.GET("/", showIndexPage)
 	//router.POST("/", performLogin)
 
+	router.POST("/coord", Coords)
+
 	// adminRoutes := router.Group("/admin")
 	// {
 	// 	adminRoutes.GET("/panel", ensureAdminned(), showAdminPanelPage)
