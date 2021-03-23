@@ -4,7 +4,38 @@
 {{ template "header.html" .}}
 
     <div class="map">
-      <img src="/static/pics/map.png" class="tilePicture" id="mainMap" style="width:100%">
+      <img src="/static/pics/map.jpg" alt="University Map" usemap="#mainMap" class="tilePicture" id="mainMap" > <!--style="width:100%">-->
+
+      <map name="mainMap">
+        <area shape="poly" coords="154,173,296,185,290,267,148,257" alt="Корпус №1" href="object/edBuild1" >
+        <area shape="poly" coords="150,258,287,269,285,304,251,348,193,330,146,303," alt="Площа перед корпусом №1" href="object/edBuild1Terr" >
+        <area shape="rect" coords="137,422,244,515" alt="Корпус №2" href="object/edBuild2" >
+        <area shape="rect" coords="248,660,164,826" alt="Корпус №3" href="object/edBuild3" >
+        <area shape="poly" coords="259.5,981.5,270.5,1169.5,144,1173.5,75,1068.5,152,1000.5,188,1000.5,193,981.5,223,977.5" alt="Корпус №4" href="object/edBuild4" >
+        <area shape="rect" coords="470,1195.5,552,1275.5" alt="Корпус №5" href="object/edBuild5" >
+        <area shape="poly" coords="398.5,1311,463.5,1306,476.5,1435,411.5,1442" alt="Корпус №7" href="object/edBuild7" >
+        <area shape="poly" coords="480.5,1328,506.5,1325,516.5,1432,493.5,1435" alt="Корпус №7a" href="object/edBuild7a" >
+        <area shape="poly" coords="308.5,1290,386.5,1291,393.5,1409,326.5,1414" alt="Корпус №8" href="object/edBuild8" >
+        <area shape="rect" coords="312.5,1018,373.5,1116" alt="Корпус №9" href="object/edBuild9" >
+        <area shape="poly" coords="281,1189,292,1298,167,1305,158,1203,234,1178" alt="Корпус №10" href="object/edBuild10" >
+        <area shape="poly" coords="624.5,1178.5,640.5,1350.5,777.5,1333.5,761.5,1162.5" alt="Корпус №11" href="object/edBuild11" >
+        <area shape="poly" coords="573.5,1174.5,570.5,1091.5,582.5,1089.5,583.5,1065.5,513.5,1065.5,513.5,1091.5,534.5,1089.5,537.5,1174.5" alt="Корпус №15" href="object/edBuild15" >
+        <area shape="poly" coords="586.5,845.5,614.5,854.5,578.5,978.5,553.5,969.5" alt="Корпус №17" href="object/edBuild17" >
+        <area shape="rect" coords="532.5,1092.5,453.5,1170.5" alt="Військова кафедра" href="object/military" >
+        <area shape="poly" coords="375.5,1003.5,389.5,1166.5,450.5,1166.5,431.5,1020.5,418.5,1021.5,416.5,996.5" alt="Міні поле" href="object/miniPitch" >
+        <area shape="poly" coords="416.5,995.5,416.5,977.5,433.5,972.5,417.5,789.5,328.5,759.5,277.5,789.5,292.5,1005.5" alt="Стадіон" href="object/stadium" >
+        <area shape="poly" coords="276.5,787.5,327.5,758.5,272.5,734.5" alt="Лава закоханих" href="object/loveBench" >
+        <area shape="poly" coords="397.5,1418,404.5,1485,327.5,1498,319.5,1426" alt="Свічка" href="object/candle" >
+        <area shape="poly" coords="448.5,1171,449.5,1278,309.5,1277,301.5,1158" alt="Студентський сквер" href="object/studSquare" >
+        <area shape="poly" coords="359.5,1673,340.5,1720,381.5,1732,399.5,1678" alt="ЕкоМаркет" href="object/ecoMarket" >
+        <area shape="poly" coords="183.5,864.5,185.5,976.5,256.5,975.5,240,850" alt="Алея ректорів" href="object/rectors" >
+        <area shape="poly" coords="129,307,131,415,241,413,241,371,237,363,229,356" alt="Площа слави" href="object/areaOfFame" >
+        <area shape="poly" coords="259,374.5,264,368.5,271,366.5,531,449.5,583,458.5,603,466.5,497,800.5,274,725.5" alt="Ботанічний сад" href="object/botanicalGarden" >
+        <area shape="rect" coords="244,527,166,649" alt="Паркова зона" href="object/parkArea" >
+        <area shape="rect" coords="468,1260.5,451,1278.5" alt="Кулиничі-1" href="object/kulin1" >
+        <area shape="poly" coords="183,833,242,831,240,850,184,864" alt="Кулиничі-2" href="object/kulin2" >
+      </map>
+
     </div>
 
 {{ template "footer.html" .}}

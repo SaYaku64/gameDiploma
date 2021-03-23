@@ -1,73 +1,74 @@
 package main
 
-import (
-	"math"
-	"net/http"
-	"strconv"
+// type (
+// 	// CoordPoint - coordinates of click
+// 	CoordPoint struct {
+// 		X float64 `json:"x"`
+// 		Y float64 `json:"y"`
+// 	}
 
-	"github.com/gin-gonic/gin"
-)
+// 	// CoordPicSize - size of picture
+// 	CoordPicSize struct {
+// 		MapWidth  float64 `json:"mapWidth"`
+// 		MapHeight float64 `json:"mapHeight"`
+// 	}
+// )
 
-type (
-	// CoordPoint - coordinates of click
-	CoordPoint struct {
-		X float64 `json:"x"`
-		Y float64 `json:"y"`
-	}
+// var (
+// 	// CoordPointVar - point object
+// 	CoordPointVar = CoordPoint{}
 
-	// CoordPicSize - size of picture
-	CoordPicSize struct {
-		MapWidth  float64 `json:"mapWidth"`
-		MapHeight float64 `json:"mapHeight"`
-	}
-)
+// 	// CoordPicSizeVar - picture object
+// 	CoordPicSizeVar = CoordPicSize{}
 
-var (
-	// CoordPointVar - point object
-	CoordPointVar = CoordPoint{}
+// 	// SPoint - point object that have standartised values
+// 	SPoint = CoordPoint{}
+// )
 
-	// CoordPicSizeVar - picture object
-	CoordPicSizeVar = CoordPicSize{}
+// // MapSize - updates map size and returns
+// func MapSize(c *gin.Context) {
+// 	mapWidth, err := strconv.ParseFloat(c.PostForm("mapWidth"), 64)
+// 	if err != nil {
+// 		c.String(http.StatusBadRequest, "Failed to check map size")
+// 		return
+// 	}
+// 	mapHeight, err := strconv.ParseFloat(c.PostForm("mapHeight"), 64)
+// 	if err != nil {
+// 		c.String(http.StatusBadRequest, "Failed to check map size")
+// 		return
+// 	}
 
-	// SPoint - point object that have standartised values
-	SPoint = CoordPoint{}
-)
+// 	CoordPicSizeVar.MapWidth = mapWidth
+// 	CoordPicSizeVar.MapHeight = mapHeight
 
-// Coords - fills coords objects
-func Coords(c *gin.Context) {
-	x, err := strconv.ParseFloat(c.PostForm("x"), 64)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Failed to check click position")
-		return
-	}
-	y, err := strconv.ParseFloat(c.PostForm("y"), 64)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Failed to check click position")
-		return
-	}
-	mapWidth, err := strconv.ParseFloat(c.PostForm("mapWidth"), 64)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Failed to check click position")
-		return
-	}
-	mapHeight, err := strconv.ParseFloat(c.PostForm("mapHeight"), 64)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Failed to check click position")
-		return
-	}
+// 	c.JSON(http.StatusOK, gin.H{
+// 		"mapWidth":  mapWidth,
+// 		"mapHeight": mapHeight,
+// 	})
+// }
 
-	CoordPointVar.X = x
-	CoordPointVar.Y = y
+// // Coords - fills coords objects
+// func Coords(c *gin.Context) {
+// 	x, err := strconv.ParseFloat(c.PostForm("x"), 64)
+// 	if err != nil {
+// 		c.String(http.StatusBadRequest, "Failed to check click position")
+// 		return
+// 	}
+// 	y, err := strconv.ParseFloat(c.PostForm("y"), 64)
+// 	if err != nil {
+// 		c.String(http.StatusBadRequest, "Failed to check click position")
+// 		return
+// 	}
 
-	CoordPicSizeVar.MapWidth = mapWidth
-	CoordPicSizeVar.MapHeight = mapHeight
+// 	CoordPointVar.X = x
+// 	CoordPointVar.Y = y
 
-	sX := (100 * x) / mapWidth
-	sY := (100 * y) / mapHeight
-	SPoint.X = math.Round(sX*100) / 100
-	SPoint.Y = math.Round(sY*100) / 100
+// 	sX := (100 * x) / CoordPicSizeVar.MapWidth
+// 	sY := (100 * y) / CoordPicSizeVar.MapHeight
+// 	SPoint.X = math.Round(sX*100) / 100
+// 	SPoint.Y = math.Round(sY*100) / 100
 
-	//fmt.Println(CoordPointVar, CoordPicSizeVar, SPoint)
+// 	//fmt.Println(CoordPointVar, CoordPicSizeVar, SPoint)
 
-	c.JSON(http.StatusOK, nil)
-}
+// 	c.JSON(http.StatusOK, nil)
+// }

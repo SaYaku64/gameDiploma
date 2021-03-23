@@ -11,9 +11,13 @@ func initializeRoutes() {
 
 	// Handling Index-page
 	router.GET("/", showIndexPage)
+
+	router.GET("/object/:name", showObjectPage)
+
 	//router.POST("/", performLogin)
 
-	router.POST("/coord", Coords)
+	// router.POST("/mapSize", MapSize)
+	// router.POST("/coord", Coords)
 
 	// adminRoutes := router.Group("/admin")
 	// {

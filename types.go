@@ -25,10 +25,11 @@ type Building struct {
 type Territory struct {
 	Params
 	Building
-	Angles []CoordPoint
+	//Angles []CoordPoint
 }
 
-// Count - type for grid
-type Count struct {
-	Count int
+// ObjectInfoType - cache of info for present
+type ObjectInfoType struct {
+	Name        string
+	Description string
 }

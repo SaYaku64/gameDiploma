@@ -14,6 +14,9 @@ import (
 
 var router *gin.Engine
 
+// Localization - var that shows user localization
+var Localization string
+
 // Client for MongoDB
 var Client = connDB()
 
@@ -28,6 +31,8 @@ func main() {
 	router.Static("/static", "./static")
 
 	initializeRoutes()
+
+	Localization = "UA" // change with cookie
 
 	err := router.Run()
 	if err != nil {

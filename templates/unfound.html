@@ -1,0 +1,17 @@
+<!--article.html-->
+
+{{ template "header.html" .}}
+
+<div class="card mt-3">
+  <div class="card-header">
+    <h4 id="articleTitle">{{.title}}</h4>
+  </div>
+  <div class="card-body">
+    <p class="h5 card-text">{{.description}}</p>
+    <br>
+    <a href="/" class="h5 btn btn-secondary">{{.main}}</a>
+  </div>
+</div>
+
+
+{{ template "footer.html" .}}
