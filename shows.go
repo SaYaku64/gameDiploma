@@ -4,45 +4,50 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// AddStandartGin - adds standart gin values to specialized
+func AddStandartGin(temp gin.H) gin.H {
+	for k, v := range GetStandartGin() {
+		temp[k] = v
+	}
+	return temp
+}
+
+// GetStandartGin - used for adding standart gin values to all pages
+func GetStandartGin() gin.H {
+	return gin.H{
+		"version": generateSessionToken(),
+		"loc":     Localization,
+	}
+}
+
 // Shows start page
 func showIndexPage(c *gin.Context) {
 	render(c, "index.html", gin.H{
-		"title":   "NULESandbox",
-		"version": generateSessionToken(),
+		"title": "NULESandbox",
 	})
 }
 
 func showObjectPage(c *gin.Context) {
 	name := c.Params.ByName("name")
 
-	var object ObjectInfoType
-	var ok bool
-	var back string
-	var main string
-	var errorTitle string
-	var errorText string
+	var locIndex = getLocIndex()
 
-	if Localization == "UA" {
-		object, ok = ObjectInfo[name]
-		if ok {
-			back = Buttons["back"]
-		} else {
-			errorText = Errors["objectNotFound"]
-			errorTitle = Errors["errorTitle"]
-			main = Buttons["main"]
-		}
+	building, ok := BuildingInfo[name]
+	if ok {
+		back := Buttons["back"][locIndex]
+		title := building[locIndex].Name
+		description := building[locIndex].Description
+
+		render(c, "territory.html", gin.H{
+			"title":       title,
+			"description": description,
+			"back":        back,
+		})
 	} else {
-		object, ok = ObjectInfoEN[name]
-		if ok {
-			back = ButtonsEN["back"]
-		} else {
-			errorText = ErrorsEN["objectNotFound"]
-			errorTitle = ErrorsEN["errorTitle"]
-			main = ButtonsEN["main"]
-		}
-	}
+		errorText := Errors["territoryNotFound"][locIndex]
+		errorTitle := Errors["errorTitle"][locIndex]
+		main := Buttons["main"][locIndex]
 
-	if !ok {
 		render(c, "unfound.html", gin.H{
 			"title":       errorTitle,
 			"description": errorText,
@@ -50,12 +55,6 @@ func showObjectPage(c *gin.Context) {
 		})
 		return
 	}
-
-	render(c, "object.html", gin.H{
-		"title":       object.Name,
-		"description": object.Description,
-		"back":        back,
-	})
 }
 
 // // Shows Conversation page (user articles)

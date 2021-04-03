@@ -1,87 +1,108 @@
 package main
 
-// ObjectInfo - cache for objects. Key got from URL
-var ObjectInfo = map[string]ObjectInfoType{
-	"edBuild1":        {"Корпус №1", "Description №1"},
-	"edBuild2":        {"Корпус №2", "Description №2"},
-	"edBuild3":        {"Корпус №3", "Description №3"},
-	"edBuild4":        {"Корпус №4", "Description №4"},
-	"edBuild5":        {"Корпус №5", "Description №5"},
-	"edBuild7":        {"Корпус №7", "Description №7"},
-	"edBuild7a":       {"Корпус №7-а", "Description №7-a"},
-	"edBuild8":        {"Корпус №8", "Description №8"},
-	"edBuild9":        {"Корпус №9", "Description №9"},
-	"edBuild10":       {"Корпус №10", "Description №10"},
-	"edBuild11":       {"Корпус №11", "Description №11"},
-	"edBuild15":       {"Корпус №15", "Description №15"},
-	"edBuild17":       {"Корпус №17", "Description №17"},
-	"stadium":         {"Стадіон", "Description Stadium"},
-	"candle":          {"Свічка", "Description Candle"},
-	"edBuild1Terr":    {"Площа перед корпусом №1", "Description Площа перед корпусом №1"},
-	"miniPitch":       {"Міні поле", "Description miniPitch"},
-	"military":        {"Військова кафедра", "Description military"},
-	"loveBench":       {"Лава закоханих", "Description loveBench"},
-	"studSquare":      {"Студентський сквер", "Description studSquare"},
-	"ecoMarket":       {"ЕкоМаркет", "Description ecoMarket"},
-	"rectors":         {"Алея ректорів", "Description rectors"},
-	"areaOfFame":      {"Площа слави", "Description areaOfFame"},
-	"botanicalGarden": {"Ботанічний сад", "Description ecoMarket"},
-	"parkZone":        {"Паркова зона", "Description parkZone"},
-	"kulin1":          {"Кулиничі біля корпусу №5", "Description kulin1"},
-	"kulin2":          {"Кулиничі біля корпусу №3", "Description kulin2"},
+import "github.com/gin-gonic/gin"
+
+// TerritoryCache - cache of all territories
+var TerritoryCache = []Territory{
+	{"edBuild1", 3, false},
+	{"edBuild2", 3, false},
+	{"edBuild3", 3, false},
+	{"edBuild4", 4, false},
+	{"edBuild5", 2, false},
+	{"edBuild7", 2, false},
+	{"edBuild7a", 1, false},
+	{"edBuild8", 2, false},
+	{"edBuild9", 2, false},
+	{"edBuild10", 3, false},
+	{"edBuild11", 4, false},
+	{"edBuild15", 2, false},
+	{"edBuild17", 2, false},
+	{"stadium", 4, true},
+	{"candle", 2, false},
+	{"edBuild1Terr", 2, true},
+	{"miniPitch", 3, true},
+	{"military", 2, false},
+	{"loveBench", 1, true},
+	{"studSquare", 3, true},
+	{"ecoMarket", 1, false},
+	{"rectors", 2, true},
+	{"areaOfFame", 3, true},
+	{"botanicalGarden", 5, true},
+	{"parkArea", 3, true},
+	{"kulin1", 1, true},
+	{"kulin2", 1, true},
 }
 
-// ObjectInfoEN - cache for objects in English. Key got from URL
-var ObjectInfoEN = map[string]ObjectInfoType{
-	"edBuild1":        {"Educational building №1", "Description №1"},
-	"edBuild2":        {"Educational building №2", "Description №2"},
-	"edBuild3":        {"Educational building №3", "Description №3"},
-	"edBuild4":        {"Educational building №4", "Description №4"},
-	"edBuild5":        {"Educational building №5", "Description №5"},
-	"edBuild7":        {"Educational building №7", "Description №7"},
-	"edBuild7a":       {"Educational building №7-а", "Description №7-a"},
-	"edBuild8":        {"Educational building №8", "Description №8"},
-	"edBuild9":        {"Educational building №9", "Description №9"},
-	"edBuild10":       {"Educational building №10", "Description №10"},
-	"edBuild11":       {"Educational building №11", "Description №11"},
-	"edBuild15":       {"Educational building №15", "Description №15"},
-	"edBuild17":       {"Educational building №17", "Description №17"},
-	"stadium":         {"Stadium", "Description Stadium"},
-	"candle":          {"\"Candle\"", "Description Candle"},
-	"edBuild1Terr":    {"Area in front of the building №1", "Description Площа перед корпусом №1"},
-	"miniPitch":       {"Mini football pitch", "Description miniPitch"},
-	"military":        {"Military Department", "Description military"},
-	"loveBench":       {"Love-bench", "Description loveBench"},
-	"studSquare":      {"Students' square", "Description studSquare"},
-	"ecoMarket":       {"EcoMarket", "Description ecoMarket"},
-	"rectors":         {"Alley of rectors", "Description rectors"},
-	"areaOfFame":      {"Area of fame", "Description areaOfFame"},
-	"botanicalGarden": {"Botanical garden", "Description botanicalGarden"},
-	"parkArea":        {"Park area", "Description parkArea"},
-	"kulin1":          {"Kulinichi near the building №5", "Description kulin1"},
-	"kulin2":          {"Kulinichi near the building №3", "Description kulin2"},
+// BuildingInfoCache - cache of info of all buildings
+var BuildingInfoCache = [][]BuildingInfoType{
+	{{"Корпус №1", "Description №1"}, {"Educational building №1", "Description №1"}},
+	{{"Корпус №2", "Description №2"}, {"Educational building №2", "Description №2"}},
+	{{"Корпус №3", "Description №3"}, {"Educational building №3", "Description №3"}},
+	{{"Корпус №4", "Description №4"}, {"Educational building №4", "Description №4"}},
+	{{"Корпус №5", "Description №5"}, {"Educational building №5", "Description №5"}},
+	{{"Корпус №7", "Description №7"}, {"Educational building №7", "Description №7"}},
+	{{"Корпус №7-а", "Description №7-a"}, {"Educational building №7-а", "Description №7-a"}},
+	{{"Корпус №8", "Description №8"}, {"Educational building №8", "Description №8"}},
+	{{"Корпус №9", "Description №9"}, {"Educational building №9", "Description №9"}},
+	{{"Корпус №10", "Description №10"}, {"Educational building №10", "Description №10"}},
+	{{"Корпус №11", "Description №11"}, {"Educational building №11", "Description №11"}},
+	{{"Корпус №15", "Description №15"}, {"Educational building №15", "Description №15"}},
+	{{"Корпус №17", "Description №17"}, {"Educational building №17", "Description №17"}},
+	{{"Стадіон", "Description Стадіон"}, {"Stadium", "Description Stadium"}},
+	{{"Свічка", "Description Свічка"}, {"\"Candle\"", "Description Candle"}},
+	{{"Площа перед корпусом №1", "Description Площа перед корпусом №1"}, {"Area in front of the building №1", "Description Площа перед корпусом №1"}},
+	{{"Міні поле", "Description Міні поле"}, {"Mini football pitch", "Description miniPitch"}},
+	{{"Військова кафедра", "Description Військова кафедра"}, {"Military Department", "Description military"}},
+	{{"Лава закоханих", "Description Лава закоханих"}, {"Love-bench", "Description loveBench"}},
+	{{"Студентський сквер", "Description Студентський сквер"}, {"Students' square", "Description studSquare"}},
+	{{"ЕкоМаркет", "Description ЕкоМаркет"}, {"EcoMarket", "Description ecoMarket"}},
+	{{"Алея ректорів", "Description Алея ректорів"}, {"Alley of rectors", "Description rectors"}},
+	{{"Площа слави", "Description Площа слави"}, {"Area of fame", "Description areaOfFame"}},
+	{{"Ботанічний сад", "Description Ботанічний сад"}, {"Botanical garden", "Description botanicalGarden"}},
+	{{"Паркова зона", "Description Паркова зона"}, {"Park area", "Description parkArea"}},
+	{{"Кулиничі біля корпусу №5", "Description Кулиничі біля корпусу №5"}, {"Kulinichi near the building №5", "Description kulin1"}},
+	{{"Кулиничі біля корпусу №3", "Description Кулиничі біля корпусу №3"}, {"Kulinichi near the building №3", "Description kulin2"}},
+	// next will be
+
+}
+
+// BuildingInfo - cache for standart objects. Key got from URL
+var BuildingInfo = map[string][]BuildingInfoType{}
+
+// FillBuildingInfoMap - fills map of building info
+func FillBuildingInfoMap() {
+	// if !auth {
+	for i, v := range TerritoryCache {
+		BuildingInfo[v.TID] = BuildingInfoCache[i]
+	}
+	// } else {
+	//
+	// }
 }
 
 // Buttons - cache for button words
-var Buttons = map[string]string{
-	"back": "Назад",
-	"main": "Повернутись на головну",
-}
-
-// ButtonsEN - cache for button words in English
-var ButtonsEN = map[string]string{
-	"back": "Back",
-	"main": "Go to Main page",
+var Buttons = map[string][]string{
+	"back":      {"Назад", "Back"},
+	"main":      {"Повернутись на головну", "Go to Main page"},
+	"showAreas": {"Показати всі об'єкти", "Show all objects"},
 }
 
 // Errors - cache for error sentences
-var Errors = map[string]string{
-	"errorTitle":     "Помилка",
-	"objectNotFound": "Обраний об'єкт - не знайдено. Перевірте правильність посилання або спробуйте пізніше.",
+var Errors = map[string][]string{
+	"errorTitle":        {"Помилка", "Error"},
+	"territoryNotFound": {"Обрана територія - не знайдена. Перевірте правильність посилання або спробуйте пізніше.", "Selected territory - not found. Please check that the link is correct or try again later."},
 }
 
-// ErrorsEN - cache for error sentences in English
-var ErrorsEN = map[string]string{
-	"errorTitle":     "Error",
-	"objectNotFound": "Selected object - not found. Please check that the link is correct or try again later.",
+func getLocalization(c *gin.Context) string {
+	if cookieVal, err := c.Cookie("loc"); err == nil {
+		return cookieVal
+	}
+	return "UA"
+}
+
+func getLocIndex() int {
+	if Localization == "EN" {
+		return 1
+	}
+	return 0
 }

@@ -1,5 +1,70 @@
 package main
 
+import (
+	"context"
+	"fmt"
+	logger "logger"
+)
+
+// GetAllUsers - gets all users from DB and return slice of them
+func GetAllUsers() []User {
+
+	var results []User
+
+	cur, err := Collection.Find(context.TODO(), obj{})
+	if err != nil {
+		logger.Error.Println(err)
+	}
+
+	// Finding multiple documents returns a cursor
+	// Iterating through the cursor allows us to decode documents one at a time
+	for cur.Next(context.TODO()) {
+
+		// Create a value into which the single document can be decoded
+		var elem User
+		err := cur.Decode(&elem)
+		if err != nil {
+			logger.Error.Println(err)
+		}
+
+		results = append(results, elem)
+	}
+
+	if err := cur.Err(); err != nil {
+		logger.Error.Println(err)
+	}
+
+	// Closing the cursor
+	cur.Close(context.TODO())
+
+	return results
+}
+
+// UpdateID - updates user by id in DB
+func UpdateID(id uint64, query interface{}) error {
+	filter := obj{"_id": id}
+
+	updateResult, err := Collection.UpdateOne(context.TODO(), filter, query)
+
+	if err != nil {
+		return fmt.Errorf("mongo.go -> UpdateID -> UpdateOne: id = %d; query = %+v", id, query)
+	}
+	logger.Info.Println("mongo.go -> UpdateID -> UpdateOne: ", updateResult)
+	return nil
+}
+
+// AddUserToDB - adds new user to DB
+func AddUserToDB(user User) error {
+	// Inserting user to DB
+	insertResult, err := Collection.InsertOne(context.TODO(), user)
+	if err != nil {
+		logger.Error.Println(err)
+		return err
+	}
+	logger.Info.Println("mongo.go -> AddUserToDB -> InsertOne: ", insertResult)
+	return nil
+}
+
 // import (
 // 	"context"
 // 	"errors"

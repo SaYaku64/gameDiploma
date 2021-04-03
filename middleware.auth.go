@@ -3,42 +3,43 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
-// // Function to substract one time from anouther
-// func subtractTime(time1, time2 time.Time) float64 {
-// 	diff := time1.Sub(time2).Seconds()
-// 	return diff
+// var ginErrors = map[string]ginError{
+// 	"notLogged": {,},
+// 	"logged":    {"Auth error", "You are already signed in!"},
+// 	"unknown":   {"Unexpected error", "Please continue using site later."},
 // }
 
-// ////////////////////////////////////////////
-// // Checking user status
-// ////////////////////////////////////////////
-// func ensureLoggedIn() gin.HandlerFunc {
-// 	return func(c *gin.Context) {
-// 		loggedInInterface, ok := c.Get("is_logged_in")
-// 		if ok {
-// 			loggedIn := loggedInInterface.(bool)
-// 			if !loggedIn {
-// 				c.AbortWithStatus(http.StatusUnauthorized)
-// 				render(c, gin.H{
-// 					"title": "Home Page",
-// 				}, "index.html")
-// 			}
-// 		} else {
-// 			c.AbortWithStatus(http.StatusUnauthorized)
-// 			render(c, gin.H{
-// 				"title": "Home Page",
-// 			}, "index.html")
-// 		}
+// IsLoggedIn - checks if user has "logged" status
+func IsLoggedIn(c *gin.Context) bool {
+	loggedInInterface, ok := c.Get("logged")
+	if ok && loggedInInterface.(bool) {
+		return true
+	}
+	return false
+}
 
-// 	}
-// }
+func ensureLoggedIn() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if !IsLoggedIn(c) {
+			c.AbortWithStatus(http.StatusUnauthorized)
+			render(c, "index.html", gin.H{
+				"title":        "NULESandbox",
+				"errorTitle":   "Auth error",
+				"errorMessage": "Please sign in to visit this page!",
+			})
+		}
+
+	}
+}
 
 // func ensureNotLoggedIn() gin.HandlerFunc {
 // 	return func(c *gin.Context) {
-// 		loggedInInterface, ok := c.Get("is_logged_in")
+// 		loggedInInterface, ok := c.Get("logged")
 // 		if ok {
 // 			loggedIn := loggedInInterface.(bool)
 // 			if loggedIn {
@@ -59,30 +60,25 @@ import (
 
 func setUserStatus() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		Localization = getLocalization(c)
 
-		// if token, err := c.Cookie("token"); err == nil || token != "" {
-		// 	c.Set("is_logged_in", true)
-		// } else {
-		// 	c.Set("is_logged_in", false)
-		// }
-
-		// log.Println(ActiveUsers)
 		if token, err := c.Cookie("token"); err == nil || token != "" { // take cookie
-			//ActiveUsers.RLock()
-			if u, ok := ActiveUsers.m[token]; ok { // take user from cache
-				//ActiveUsers.RUnlock()
-				if u.Token.Endless {
-					c.Set("is_logged_in", true)
+
+			user, found := AllUsersMap.GetUserByToken(token)
+
+			if found {
+				var time int
+				if !user.Endless {
+					time = 60 * 60 * 2 // cookie for 2h
 				} else {
-					// diff := subtractTime(u.Token.EndTime, time.Now()) // checking if user
-					// if diff > 0 {
-					c.Set("is_logged_in", true)
-					c.SetCookie("token", token, 600, "", "", false, true) // token 10m
-					// }
+					time = 60 * 60 * 24 * 365 // cookie for 1y
 				}
+				c.SetCookie("token", token, time, "", "", false, true)
+				c.Set("logged", true)
 			}
+
 		} else {
-			c.Set("is_logged_in", false)
+			c.Set("logged", false)
 		}
 	}
 }
