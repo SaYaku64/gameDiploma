@@ -4,32 +4,26 @@ $("document").ready(() => {
     if (localization == undefined) {
         localization = 'UA';
     }
-    Cookies.set('loc', localization, { expires: 180});
+    Cookies.set('loc', localization, { expires: 365});
 
-    var mapHeight
-    var mapWidth
-
-    // $('img[usemap]').mapster('resize');
-
-    // $('img[usemap]').mapster({
-    //     fillColor: 'ff0000',
-    //     stroke: true,
-    //     singleSelect: true
-    // });
-
-	$('map').imageMapResize();
+    $('map').imageMapResize();
     
-    $("#mainMap").on("click", function () {
-        mapHeight = this.height;
-        mapWidth = this.width;
+    let loginBtn = $("#buttonLogin"); // Signing in
+    let regBtn = $("#buttonReg"); // Signing up
 
-        var elem = document.getElementById('mainMap');
-        const rect = elem.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        console.log(x + "," + y + ",");
-        //window.location.href = "/"
-    });
+    // var mapHeight
+    // var mapWidth
+    // $("#mainMap").on("click", function () {
+    //     mapHeight = this.height;
+    //     mapWidth = this.width;
+
+    //     var elem = document.getElementById('mainMap');
+    //     const rect = elem.getBoundingClientRect();
+    //     const x = event.clientX - rect.left;
+    //     const y = event.clientY - rect.top;
+    //     console.log(x + "," + y + ",");
+    //     //window.location.href = "/"
+    // });
 
     $("#localization").on("click", function () {
         if (localization == "UA") {
@@ -38,40 +32,49 @@ $("document").ready(() => {
             localization = "UA"
         }
         Cookies.remove('loc');
-        Cookies.set('loc', localization, { expires: 180});
+        Cookies.set('loc', localization, { expires: 365});
         window.location.reload()
     });
 
-    let loginBtn = $("#buttonLogin"); // Signing in
-    
-    // let check = "false";
-    // // Handle the checkbox
-    // $("#checkLogin").click(function (e) {
-    //     if ($(this).is(':checked')) {
-    //         check = "true";
-    //     } else {
-    //         check = "false";
-    //     }
-    // });
-
     // Signing in
     loginBtn.click(() => {
-        var name = $("#usernameLogin").val();
-        var password = $("#passwordLogin").val();
+        $("#modalClose").click();
+        var name = $("#username").val();
+        var password = $("#password").val();
         var check
         
-        if ($("#checkLogin").is(':checked')) {
+        if ($("#check").is(':checked')) {
             check = "true";
         } else {
             check = "false";
         }
 
         $.post("/login", {
-            usernameLogin: name,
-            passwordLogin: password,
-            checkLogin: check,
+            username: name,
+            password: password,
+            check: check,
         }, function(result){
-            if (result.err != null) {
+            if (result.error != null) {
+                errorAlert(result.message);
+            } else {
+                successAlert(result.message);
+                $( "#full-menu" ).load(window.location.href + " #full-menu" );
+            }
+        });
+    });
+
+    regBtn.click(() => {
+        $("#modalCloseReg").click();
+        var email = $("#emailReg").val();
+        var name = $("#usernameReg").val();
+        var password = $("#passwordReg").val();
+
+        $.post("/register", {
+            email: email,
+            username: name,
+            password: password,
+        }, function(result){
+            if (result.error != null) {
                 errorAlert(result.message);
             } else {
                 successAlert(result.message);

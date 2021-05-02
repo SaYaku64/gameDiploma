@@ -14,7 +14,7 @@ var AllUsersMap = AllUsers{
 // GetUserByInfo - return user if login and password are correct
 func (au *AllUsers) GetUserByInfo(login, password string) (User, bool) {
 	for _, user := range au.Cache {
-		if login == user.Login && password == user.Password {
+		if login == user.Login && checkEncoded(password, user.Password) {
 			return user, true
 		}
 	}
@@ -31,43 +31,50 @@ func (au *AllUsers) FillAllUsers() {
 	}
 }
 
+// UpsertUserToMap - adds token field to map of users
+func (au *AllUsers) UpsertUserToMap(user User, token string, endless bool) {
+	user.Token.Token = token
+	user.Token.Endless = endless
+	au.RLock()
+	au.Cache[user.ID] = user
+	au.RUnlock()
+}
+
 // GetUserByToken - return user by token
 func (au *AllUsers) GetUserByToken(token string) (User, bool) {
 	for _, user := range au.Cache {
-		if user.Token == token {
+		if user.Token.Token == token {
 			return user, true
 		}
 	}
 	return User{}, false
 }
 
-// AddTokenToMap - adds token fielda to map of users
-func (au *AllUsers) AddTokenToMap(id uint64, token string, endless bool) {
-	au.RLock()
-	user := au.Cache[id]
-	user.Token = token
-	user.Endless = endless
-	au.Cache[id] = user
-	au.RUnlock()
-}
-
-// UpdateTokenInDB - updates token in cache and DB
-func (au *AllUsers) UpdateTokenInDB(user User, token string, endless bool) bool {
-	if err := UpdateID(user.ID, obj{"$set": obj{"token": token, "endless": endless}}); err != nil {
-		logger.Error.Println("users.go -> UpdateTokenInDB -> UpdateID: err =", err)
-		return false
-	}
-	au.AddTokenToMap(user.ID, token, endless)
-	return true
-}
-
 // GetCurrentUser - gets user by token from gin.Context
 func GetCurrentUser(c *gin.Context) (User, bool) {
-	token, err := c.Cookie("token")
+	token, err := c.Cookie("nules")
 	if err != nil {
 		logger.Error.Println("users.go -> GetCurrentUser -> Cookie: err =", err)
 		return User{}, false
 	}
 
 	return AllUsersMap.GetUserByToken(token)
+}
+
+func checkEmailExist(email string) bool {
+	for _, user := range AllUsersMap.Cache {
+		if email == user.Email {
+			return true
+		}
+	}
+	return false
+}
+
+func checkLoginExist(login string) bool {
+	for _, user := range AllUsersMap.Cache {
+		if login == user.Login {
+			return true
+		}
+	}
+	return false
 }

@@ -6,6 +6,28 @@ import (
 	logger "logger"
 )
 
+// UpdateTokenInDB - updates token in cache and DB
+func (au *AllUsers) UpdateTokenInDB(user User, tokenDB string, endless bool) bool {
+	if err := UpdateID(user.ID, obj{"$set": obj{"token": token{tokenDB, endless}}}); err != nil {
+		logger.Error.Println("users.go -> UpdateTokenInDB -> UpdateID: err =", err)
+		return false
+	}
+	au.UpsertUserToMap(user, tokenDB, endless)
+	return true
+}
+
+// AddNewUser - Adds new user to DB
+func AddNewUser(user User) error {
+	// Inserting user to DB
+	insertResult, err := Collection.InsertOne(context.TODO(), user)
+	if err != nil {
+		return fmt.Errorf("mongo.go -> AddNewUser -> InsertOne: user = %+v; err = %s", user, err)
+	}
+	logger.Info.Println("mongo.go -> AddNewUser -> InsertOne: ", insertResult)
+	AllUsersMap.UpsertUserToMap(user, user.Token.Token, false)
+	return nil
+}
+
 // GetAllUsers - gets all users from DB and return slice of them
 func GetAllUsers() []User {
 
@@ -47,50 +69,11 @@ func UpdateID(id uint64, query interface{}) error {
 	updateResult, err := Collection.UpdateOne(context.TODO(), filter, query)
 
 	if err != nil {
-		return fmt.Errorf("mongo.go -> UpdateID -> UpdateOne: id = %d; query = %+v", id, query)
+		return fmt.Errorf("mongo.go -> UpdateID -> UpdateOne: id = %d; query = %+v; err = %s", id, query, err)
 	}
-	logger.Info.Println("mongo.go -> UpdateID -> UpdateOne: ", updateResult)
+	logger.Info.Printf("mongo.go -> UpdateID -> UpdateOne: %+v; id = %d; query = %+v\n", updateResult, id, query)
 	return nil
 }
-
-// AddUserToDB - adds new user to DB
-func AddUserToDB(user User) error {
-	// Inserting user to DB
-	insertResult, err := Collection.InsertOne(context.TODO(), user)
-	if err != nil {
-		logger.Error.Println(err)
-		return err
-	}
-	logger.Info.Println("mongo.go -> AddUserToDB -> InsertOne: ", insertResult)
-	return nil
-}
-
-// import (
-// 	"context"
-// 	"errors"
-// 	"log"
-
-// 	//"github.com/gin-gonic/gin"
-
-// 	"go.mongodb.org/mongo-driver/bson"
-// 	"golang.org/x/crypto/bcrypt"
-// )
-
-// /////////////////////////////////////////////
-// // Password manipulations
-// /////////////////////////////////////////////
-
-// // HashString - encoding string
-// func HashString(password string) (string, error) {
-// 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-// 	return string(bytes), err
-// }
-
-// // CheckPasswordHash - checking if entered password == encoded password
-// func CheckPasswordHash(password, hash string) bool {
-// 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-// 	return err == nil
-// }
 
 // /////////////////////////////////////////////
 // // User manipulations

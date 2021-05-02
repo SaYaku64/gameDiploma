@@ -11,121 +11,111 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     
     <img src='/static/pics/flags{{ if ne .loc "UA"}}EN{{end}}.png' alt="Мова" id="localization" width="50">
-    <!-- <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
+    <ul class="navbar-nav mr-auto">
 
-    {{ if eq .logged false}}
-    <!--Display this link only when the user is not logged in-->
-    <li class="nav-item dropdown form-control mr-sm-2">
-      <a class="nav-link dropdown-toggle mt-n2 font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Sign in
-      </a>
-      <div class="panel panel-default dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="panel-body p-4">
-            <div class="form-group">
-              <label for="usernameLogin">Username</label>
-              <input type="text" class="form-control " id="usernameLogin" name="usernameLogin" placeholder="Username">
-            </div>
-            <div class="form-group">
-              <label for="passwordLogin">Password</label>
-              <input type="password" class="form-control " id="passwordLogin" name="passwordLogin" placeholder="Password">
-            </div>
-            <!-- <div class="form-check mr-5">
-              <input class="form-check-input pl-n1" type="checkbox" id="checkLogin">
-              <label class="form-check-label pl-2" for="checkLogin"> Remember me<br>longer than 10 min</label>
-            </div> -->
-            <div class="form-group my-3">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="checkLogin">
-                <label class="form-check-label pl-2" for="checkLogin">Remember me</label>
+      {{ if eq .logged false}}
+      <!-- Sign In -->
+      <li class="nav-item">
+        <button type="button" class="nav-button font-weight-bold btn btn-primary" data-toggle="modal" data-target="#loginModal">{{ .signIn }}</button>
+        <div class="modal " id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">{{ .signIn }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-            </div>
-            <button id="buttonLogin" class="btn btn-primary ml-4">Login</button>
-        </div>
-      </div> 
-    </li>
-
-  <li class="form-control mr-sm-2 font-weight-bold btn btn-light" data-toggle="modal" data-target="#staticBackdrop">
-    <a href="#">Sign up</a>
-  </li>
-
-  <!-- Modal window sign up-->
-  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Signing up</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="panel panel-default col-sm-6">
-            <div class="panel-body">
-              <!--Create a form that POSTs to the `/u/register` route-->
-              <form class="form" action="/u/register" method="POST">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com">
-                </div>
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" id="username" name="username" placeholder="Username">
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary">Register</button>
-              </form>
+                <!-- <form class="form"> -->
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="username">{{ .login }}</label>
+                      <input type="text" class="form-control" id="username" name="username" placeholder="{{ .login }}">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">{{ .password }}</label>
+                      <input type="password" name="password" class="form-control" id="password" placeholder="{{ .password }}">
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" name="check" id="check">
+                      <label class="form-check-label pl-2" for="check">{{ .remember }}</label>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="buttonLogin" class="btn btn-primary">{{ .signIn }}</button>
+                    <button id="modalClose" type="button" class="btn btn-secondary" data-dismiss="modal">{{ .close }}</button>
+                  </div>
+                <!-- </form> -->
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  {{end}} 
+      </li>
+      
+      <!-- Sign Up -->
+      <li class="nav-item">
+        <button type="button" class="nav-button text-primary font-weight-bold btn btn-light" data-toggle="modal" data-target="#registerModal">{{ .reg }}</button>
 
+        <div class="modal " id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">{{ .reg }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                <!-- <form class="form" action="/" method="POST"> -->
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="emailReg">{{ .email }}</label>
+                      <input type="email" class="form-control" id="emailReg" name="emailReg" placeholder="example@mail.com">
+                    </div>
+                    <div class="form-group">
+                      <label for="usernameReg">{{ .login }}</label>
+                      <input type="text" class="form-control" id="usernameReg" name="usernameReg" placeholder="{{ .login }}">
+                    </div>
+                    <div class="form-group">
+                      <label for="passwordReg">{{ .password }}</label>
+                      <input type="password" name="passwordReg" class="form-control" id="passwordReg" placeholder="{{ .password }}">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="buttonReg" type="submit" class="btn btn-primary">{{ .reg }}</button>
+                    <button id="modalCloseReg" type="button" class="btn btn-secondary" data-dismiss="modal">{{ .close }}</button>
+                  </div>
+                <!-- </form> -->
+            </div>
+          </div>
+        </div>
+      </li>
+      {{end}}
 
-  {{ if .logged }}
-    <li class="form-control mr-sm-2 font-weight-bold">
-      <a href="/logout">Logout</a>
-    </li>
-  {{end}}
+      {{ if .logged }}
+      <li class="nav-item font-weight-bold btn btn-info">
+        <a class="text-light" href="/logout">{{ .logout }}</a>
+      </li>
+      {{end}}
 
+    </ul>
   </div>
 </nav>
 
-<!--If there's an error, display the error-->
-{{ if .ErrorTitle}}
-<p class="bg-danger dropdown-item text-white font-weight-bold">
-  {{.ErrorTitle}}: {{.ErrorMessage}}
+{{ if .messageError}}
+<p class="bg-danger dropdown-item text-white font-weight-bold" id="messageError">
+  {{.messageError}}
 </p>
+<script>
+  setTimeout(() => $( "#messageError" ).remove(), 2500);
+</script>
+{{end}}
+
+{{ if .messageOK}}
+<p class="bg-success dropdown-item text-white font-weight-bold" id="messageOK">
+  {{.messageOK}}
+</p>
+<script>
+  setTimeout(() => $( "#messageOK" ).remove(), 2500);
+</script>
 {{end}}
 
 <p id="errorMenu"></p>

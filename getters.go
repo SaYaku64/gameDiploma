@@ -10,7 +10,7 @@ func getCurrentTime() string {
 }
 
 // func getCurrentUser(c *gin.Context) (user, error) {
-// 	token, err := c.Cookie("token")
+// 	token, err := c.Cookie("nules")
 // 	if err != nil {
 // 		log.Println(err)
 // 		return user{}, errors.New("Absent token")

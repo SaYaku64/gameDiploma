@@ -34,17 +34,17 @@ type (
 
 	// User - user object
 	User struct {
-		ID       uint64 `json:"_id"`
-		Login    string `json:"login"`
-		Password string `json:"password"`
-		Email    string `json:"email"`
-		Banned   bool   `json:"banned"`
-		token
+		ID       uint64 `json:"_id" bson:"_id"`
+		Login    string `json:"login" bson:"login"`
+		Password string `json:"password" bson:"password"`
+		Email    string `json:"email" bson:"email"`
+		Banned   bool   `json:"banned" bson:"banned"`
+		Token    token  `json:"token" bson:"token"`
 	}
 
 	token struct {
-		Token   string `json:"token"`
-		Endless bool   `json:"endless"`
+		Token   string `json:"token" bson:"token"`
+		Endless bool   `json:"endless" bson:"endless"`
 	}
 
 	// AllUsers - struct that contain users

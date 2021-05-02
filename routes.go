@@ -11,6 +11,8 @@ func initializeRoutes() {
 	// Handling Index-page
 	router.GET("/", showIndexPage)
 	router.POST("/login", performLogin)
+	router.POST("/register", register)
+	router.GET("/logout", logout)
 
 	router.GET("/object/:name", showObjectPage)
 

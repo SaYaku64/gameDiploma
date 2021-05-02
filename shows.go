@@ -5,19 +5,33 @@ import (
 )
 
 // AddStandartGin - adds standart gin values to specialized
-func AddStandartGin(temp gin.H) gin.H {
-	for k, v := range GetStandartGin() {
+func AddStandartGin(c *gin.Context, temp gin.H) gin.H {
+	for k, v := range GetStandartGin(c) {
 		temp[k] = v
 	}
 	return temp
 }
 
 // GetStandartGin - used for adding standart gin values to all pages
-func GetStandartGin() gin.H {
-	return gin.H{
+func GetStandartGin(c *gin.Context) gin.H {
+	standard := gin.H{
 		"version": generateSessionToken(),
 		"loc":     Localization,
+		"main":    getLoc("main", GinLabels),
+		"back":    getLoc("back", GinLabels),
 	}
+	if IsLoggedIn(c) {
+		standard["logout"] = getLoc("logout", GinLabels)
+	} else {
+		standard["signIn"] = getLoc("signIn", GinLabels)
+		standard["reg"] = getLoc("reg", GinLabels)
+		standard["close"] = getLoc("close", GinLabels)
+		standard["email"] = getLoc("email", GinLabels)
+		standard["login"] = getLoc("login", GinLabels)
+		standard["password"] = getLoc("password", GinLabels)
+		standard["remember"] = getLoc("remember", GinLabels)
+	}
+	return standard
 }
 
 // Shows start page
@@ -29,29 +43,24 @@ func showIndexPage(c *gin.Context) {
 
 func showObjectPage(c *gin.Context) {
 	name := c.Params.ByName("name")
-
 	var locIndex = getLocIndex()
 
 	building, ok := BuildingInfo[name]
 	if ok {
-		back := Buttons["back"][locIndex]
 		title := building[locIndex].Name
 		description := building[locIndex].Description
 
 		render(c, "territory.html", gin.H{
 			"title":       title,
 			"description": description,
-			"back":        back,
 		})
 	} else {
-		errorText := Errors["territoryNotFound"][locIndex]
-		errorTitle := Errors["errorTitle"][locIndex]
-		main := Buttons["main"][locIndex]
+		errorTitle := getLoc("errorTitle", Errors)
+		errorText := getLoc("territoryNotFound", Errors)
 
 		render(c, "unfound.html", gin.H{
 			"title":       errorTitle,
 			"description": errorText,
-			"main":        main,
 		})
 		return
 	}
