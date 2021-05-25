@@ -10,94 +10,127 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     
-    <img src='/static/pics/flags{{ if ne .loc "UA"}}EN{{end}}.png' alt="Мова" id="localization" width="50">
+    <img src='/static/pics/flags{{ if ne .loc "UA"}}EN{{end}}.png' class="mr-5" alt="Мова" id="localization" width="50">
     <ul class="navbar-nav mr-auto">
 
-      {{ if eq .logged false}}
-      <!-- Sign In -->
-      <li class="nav-item">
-        <button type="button" class="nav-button font-weight-bold btn btn-primary" data-toggle="modal" data-target="#loginModal">{{ .signIn }}</button>
-        <div class="modal " id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">{{ .signIn }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-                <!-- <form class="form"> -->
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="username">{{ .login }}</label>
-                      <input type="text" class="form-control" id="username" name="username" placeholder="{{ .login }}">
-                    </div>
-                    <div class="form-group">
-                      <label for="password">{{ .password }}</label>
-                      <input type="password" name="password" class="form-control" id="password" placeholder="{{ .password }}">
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" name="check" id="check">
-                      <label class="form-check-label pl-2" for="check">{{ .remember }}</label>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button id="buttonLogin" class="btn btn-primary">{{ .signIn }}</button>
-                    <button id="modalClose" type="button" class="btn btn-secondary" data-dismiss="modal">{{ .close }}</button>
-                  </div>
-                <!-- </form> -->
-            </div>
-          </div>
-        </div>
-      </li>
-      
-      <!-- Sign Up -->
-      <li class="nav-item">
-        <button type="button" class="nav-button text-primary font-weight-bold btn btn-light" data-toggle="modal" data-target="#registerModal">{{ .reg }}</button>
-
-        <div class="modal " id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="registerModalLabel">{{ .reg }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-                <!-- <form class="form" action="/" method="POST"> -->
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="emailReg">{{ .email }}</label>
-                      <input type="email" class="form-control" id="emailReg" name="emailReg" placeholder="example@mail.com">
-                    </div>
-                    <div class="form-group">
-                      <label for="usernameReg">{{ .login }}</label>
-                      <input type="text" class="form-control" id="usernameReg" name="usernameReg" placeholder="{{ .login }}">
-                    </div>
-                    <div class="form-group">
-                      <label for="passwordReg">{{ .password }}</label>
-                      <input type="password" name="passwordReg" class="form-control" id="passwordReg" placeholder="{{ .password }}">
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button id="buttonReg" type="submit" class="btn btn-primary">{{ .reg }}</button>
-                    <button id="modalCloseReg" type="button" class="btn btn-secondary" data-dismiss="modal">{{ .close }}</button>
-                  </div>
-                <!-- </form> -->
-            </div>
-          </div>
-        </div>
-      </li>
-      {{end}}
-
-      {{ if .logged }}
-      <li class="nav-item font-weight-bold btn btn-info">
-        <a class="text-light" href="/logout">{{ .logout }}</a>
-      </li>
-      {{end}}
+    {{ if .logged }}
+    <li class="nav-item">
+      <a class="nav-button font-weight-bold btn btn-success" href="/infographics">{{ .infographics }}</a>
+    </li>
+    {{end}}
+    <li class="nav-item">
+      <button type="button" class="nav-button font-weight-bold btn btn-light" data-toggle="modal" data-target="#infoModal">Допомога</button>
+    </li>
 
     </ul>
   </div>
+
+  {{ if eq .logged false}}
+  <!-- Sign In -->
+    <button type="button" class="nav-button font-weight-bold btn btn-primary" data-toggle="modal" data-target="#loginModal">{{ .signIn }}</button>
+  <!-- Sign Up -->
+    <button type="button" class="ml-3 nav-button text-primary font-weight-bold btn btn-light" data-toggle="modal" data-target="#registerModal">{{ .reg }}</button>
+  {{end}}
+
+  {{ if .logged }}
+    <a class="nav-button text-light font-weight-bold btn btn-info" href="/logout">{{ .logout }}</a>
+  {{end}}
+
+  <!-- Login Modal -->
+  <div class="modal " id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">{{ .signIn }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="username">{{ .login }}</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="{{ .login }}">
+            </div>
+            <div class="form-group">
+              <label for="password">{{ .password }}</label>
+              <input type="password" name="password" class="form-control" id="password" placeholder="{{ .password }}">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="check" id="check">
+              <label class="form-check-label pl-2" for="check">{{ .remember }}</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="buttonLogin" class="btn btn-primary">{{ .signIn }}</button>
+            <button id="modalClose" type="button" class="btn btn-secondary" data-dismiss="modal">{{ .close }}</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- Login Modal -->
+
+  <!-- Register Modal -->
+  <div class="modal " id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModalLabel">{{ .reg }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="emailReg">{{ .email }}</label>
+              <input type="email" class="form-control" id="emailReg" name="emailReg" placeholder="example@mail.com">
+            </div>
+            <div class="form-group">
+              <label for="usernameReg">{{ .login }}</label>
+              <input type="text" class="form-control" id="usernameReg" name="usernameReg" placeholder="{{ .login }}">
+            </div>
+            <div class="form-group">
+              <label for="passwordReg">{{ .password }}</label>
+              <input type="password" name="passwordReg" class="form-control" id="passwordReg" placeholder="{{ .password }}">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="buttonReg" type="submit" class="btn btn-primary">{{ .reg }}</button>
+            <button id="modalCloseReg" type="button" class="btn btn-secondary" data-dismiss="modal">{{ .close }}</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- Register Modal -->
+
+  <!-- Info Modal -->
+  <div class="modal " id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoModalLabel">Допомога</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <div class="alert alert-light" role="alert">
+              <h4 class="alert-heading">Вітаю вас!</h4>
+              <p>Ви знаходитесь на головній сторінці проєкту <b>NULESandbox</b>!</p>
+              <p>Я дуже вдячний, що Ви завітали, втім, до справи. Коротко про те, що Ви можете зробити:</p>
+              <p>1. Ви можете натиснути на корпуси, або деякі інші об'єкти на території кампусу, щоб переглянути інформацію про них.</p>
+              <p>2. Ви можете увійти або зареєструватись, що відкриє вам доступ до:</p>
+              <p> - проходження опитування, спрямованого на покращення життя студентів</p>
+              <p> - перегляду інфографіки та можливість змінювати її результати</p>
+              <p> - зміни об'єктів та перегляд інформації про них</p>
+              <hr>
+              <small>Реєстрація, результати опитування та інше - <b> строго конфіденційні</b>.</small>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- Info Modal -->
+
 </nav>
 
 {{ if .messageError}}
@@ -105,7 +138,7 @@
   {{.messageError}}
 </p>
 <script>
-  setTimeout(() => $( "#messageError" ).remove(), 2500);
+  setTimeout(() => $( "#messageError" ).remove(), 3500);
 </script>
 {{end}}
 

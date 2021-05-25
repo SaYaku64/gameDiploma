@@ -2,6 +2,7 @@ package main
 
 import (
 	logger "logger"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,16 +26,92 @@ func (au *AllUsers) GetUserByInfo(login, password string) (User, bool) {
 func (au *AllUsers) FillAllUsers() {
 	users := GetAllUsers()
 	for _, user := range users {
-		AllUsersMap.RLock()
-		AllUsersMap.Cache[user.ID] = user
-		AllUsersMap.RUnlock()
+		au.RLock()
+		au.Cache[user.ID] = user
+		au.RUnlock()
 	}
 }
 
-// UpsertUserToMap - adds token field to map of users
-func (au *AllUsers) UpsertUserToMap(user User, token string, endless bool) {
-	user.Token.Token = token
-	user.Token.Endless = endless
+// GetUserBuildings - gets current user's buildings
+func GetUserBuildings(c *gin.Context) ([]DBBuilding, bool) {
+	user, ok := GetCurrentUser(c)
+	if !ok {
+		return []DBBuilding{}, ok
+	}
+	return user.Fields, ok
+}
+
+// Changes territory
+func changeTerritory(c *gin.Context) {
+	user, ok := GetCurrentUser(c)
+	if !ok {
+		c.JSON(http.StatusOK, gin.H{
+			"error":   true,
+			"message": getLoc("unauth", Errors),
+		})
+		return
+	}
+	territory := c.PostForm("territory")
+	build := c.PostForm("build")
+
+	if len(user.Fields) == 0 {
+		user.Fields = append(user.Fields, DBBuilding{TID: territory, BID: build})
+		ok := AllUsersMap.UpdateBuildingsInDB(user, user.Fields)
+		if ok {
+			c.JSON(http.StatusOK, gin.H{
+				"message": getLoc("successfulTerrChanging", Errors),
+			})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"error":   true,
+			"message": getLoc("invalidTerrChanging", Errors),
+		})
+		return
+	}
+
+	var changed bool
+
+	for i, v := range user.Fields {
+		if v.TID == territory {
+			user.Fields[i].BID = build
+			changed = true
+			continue
+		}
+	}
+	if !changed {
+		user.Fields = append(user.Fields, DBBuilding{TID: territory, BID: build})
+	}
+
+	ok = AllUsersMap.UpdateBuildingsInDB(user, user.Fields)
+	if ok {
+		c.JSON(http.StatusOK, gin.H{
+			"message": getLoc("successfulTerrChanging", Errors),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"error":   true,
+		"message": getLoc("invalidTerrChanging", Errors),
+	})
+}
+
+// GetUserBuildingByTID - gets current user's building by territory
+func GetUserBuildingByTID(c *gin.Context, tid string) string {
+	dbBuildings, ok := GetUserBuildings(c)
+	if !ok || len(dbBuildings) == 0 {
+		return ""
+	}
+	for _, bldStruct := range dbBuildings {
+		if tid == bldStruct.TID {
+			return bldStruct.BID
+		}
+	}
+	return ""
+}
+
+// UpdateUserInMap - updates user in map of users
+func (au *AllUsers) UpdateUserInMap(user User) {
 	au.RLock()
 	au.Cache[user.ID] = user
 	au.RUnlock()

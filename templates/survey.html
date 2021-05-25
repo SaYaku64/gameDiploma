@@ -1,0 +1,96 @@
+<!--index.html-->
+
+{{ template "header.html" .}}
+
+{{ if .asked }}
+<div class="surveyDivTitle h3">
+  {{.surThanks}}
+  <br>
+  <br>
+  <span>
+    <a class="font-weight-bold btn btn-success" href="/infographics">{{ .infographics }}</a>
+  </span>
+</div>
+{{end}}
+
+{{ if eq .asked false}}
+<div class="surveyDivTitle h3">
+  {{.surPhrase}}
+  <small class="text-muted">{{.surConf}}</small>
+</div>
+<br>
+<div class="surveyDiv">
+  <div class="form-group">
+    <label for="selectYear" class="h5">1. {{.firstQ}}</label>
+    <select class="form-control" id="selectYear">
+      <option value="ch" selected>{{.choose}}...</option>
+      <option value="abit">{{.firstQ1}}</option>
+      <option value="bak1">{{.firstQ2}}</option>
+      <option value="bak3">{{.firstQ3}}</option>
+      <option value="mah">{{.firstQ4}}</option>
+      <option value="no">{{.firstQ5}}</option>
+      <option value="tutor">{{.firstQ6}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="selectUniversity" class="h5">2. {{.secondQ}}</label>
+    <select class="form-control" id="selectUniversity">
+      <option value="ch" selected>{{.choose}}...</option>
+      <option value="abit">{{.secondQ1}}</option>
+      <option value="tutor">{{.secondQ2}}</option>
+      <option value="stud">{{.secondQ3}}</option>
+      <option value="old">{{.secondQ4}}</option>
+      <option value="other">{{.other}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="rangeMarkCum" class="h5">3. {{.thirdQ}}</label>
+    <input type="range" class="form-control-range" min="0" max="10" id="rangeMarkCum">
+  </div>
+  <div class="form-group">
+    <label for="rangeMarkCorp" class="h5">4. {{.fourthQ}}</label>
+    <input type="range" class="form-control-range" min="0" max="10" id="rangeMarkCorp">
+  </div>
+  <div class="form-group">
+    <label for="selecChanges" class="h5">5. {{.fifthQ}}</label>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="chk1">
+      <label class="form-check-label" for="chk1">{{.fifthQ1}}</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="chk2">
+      <label class="form-check-label" for="chk2">{{.fifthQ2}}</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="chk3">
+      <label class="form-check-label" for="chk3">{{.fifthQ3}}</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="selecChanges" class="h5">6. {{.sixthQ}}</label>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="chk4">
+      <label class="form-check-label" for="chk4">{{.sixthQ1}}</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="chk5">
+      <label class="form-check-label" for="chk5">{{.sixthQ2}}</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="chk6">
+      <label class="form-check-label" for="chk6">{{.sixthQ3}}</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="chk7">
+      <label class="form-check-label" for="chk7">{{.sixthQ4}}</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="chk8">
+      <label class="form-check-label" for="chk8">{{.sixthQ5}}</label>
+    </div>
+  </div>
+  <button class="btn btn-primary" id="buttonSurvey">{{.send}}</button>
+</div>
+{{end}}
+
+{{ template "footer.html" .}}

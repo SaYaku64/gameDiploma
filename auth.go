@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"logger"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 
@@ -38,7 +39,7 @@ func checkEmailValidation(email string) bool {
 func performLogin(c *gin.Context) {
 	login := c.PostForm("username")
 	password := c.PostForm("password")
-	check := c.PostForm("check")
+	check, _ := strconv.ParseBool(c.PostForm("check"))
 
 	if strings.TrimSpace(login) != "" && strings.TrimSpace(password) != "" {
 		user, ok := AllUsersMap.GetUserByInfo(login, password)
@@ -47,7 +48,7 @@ func performLogin(c *gin.Context) {
 			c.Set("logged", true)
 			token := generateSessionToken()
 			var time int
-			if check == "true" {
+			if check {
 				time = 60 * 60 * 24 * 365 // cookie for 1y
 				AllUsersMap.UpdateTokenInDB(user, token, true)
 			} else {
@@ -112,7 +113,6 @@ func register(c *gin.Context) {
 			"message": getLoc("invalidEmail", Errors),
 		})
 	}
-
 }
 
 func registerNewUser(email, username, password string) (string, string) {
@@ -126,9 +126,9 @@ func registerNewUser(email, username, password string) (string, string) {
 
 	hPass := encode(password)
 	userToken := generateSessionToken()
-	usr := User{ID: uint64(len(AllUsersMap.Cache)), Login: username, Email: email, Password: hPass, Token: token{userToken, false}}
+	usr := User{ID: uint64(len(AllUsersMap.Cache) + 1), Login: username, Email: email, Password: hPass, Token: token{userToken, false}}
 
-	if err := AddNewUser(usr); err != nil {
+	if err := AllUsersMap.AddNewUser(usr); err != nil {
 		logger.Error.Println("auth.go -> registerNewUser -> AddNewUser: err =", err)
 		return "", getLoc("internalError", Errors)
 	}

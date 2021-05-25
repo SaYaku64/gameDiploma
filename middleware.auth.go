@@ -17,14 +17,22 @@ func IsLoggedIn(c *gin.Context) bool {
 	return false
 }
 
+// IsAsked - checks if user has "asked" status
+func IsAsked(c *gin.Context) bool {
+	askedInterface, ok := c.Get("asked")
+	if ok && askedInterface.(bool) {
+		return true
+	}
+	return false
+}
+
 func ensureLoggedIn() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if !IsLoggedIn(c) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 			render(c, "index.html", gin.H{
 				"title":        "NULESandbox",
-				"errorTitle":   "Auth error",
-				"errorMessage": "Please sign in to visit this page!",
+				"messageError": getLoc("unauth", Errors),
 			})
 		}
 
@@ -68,10 +76,12 @@ func setUserStatus() gin.HandlerFunc {
 					time = 60 * 60 * 24 * 365 // cookie for 1y
 				}
 				c.SetCookie("nules", token, time, "", "", false, true)
+				c.Set("asked", user.Asked)
 				c.Set("logged", true)
 			}
 
 		} else {
+			c.Set("asked", false)
 			c.Set("logged", false)
 		}
 	}

@@ -26,10 +26,13 @@ var Client = connDB()
 // Collection - connect to collection from DB
 var Collection = Client.Database(mongoDatabase).Collection(mongoCollUsers)
 
+// CollectionInfo - connect to collectionInfo from DB
+var CollectionInfo = Client.Database(mongoDatabase).Collection(mongoCollInfographics)
+
 func main() {
 
 	AllUsersMap.FillAllUsers()
-	FillBuildingInfoMap()
+	SurveyMap.FillAllSurveys()
 
 	gin.SetMode(gin.ReleaseMode)
 
@@ -52,6 +55,7 @@ func main() {
 func render(c *gin.Context, templateName string, data gin.H) {
 
 	data["logged"] = IsLoggedIn(c)
+	data["asked"] = IsAsked(c)
 
 	switch c.Request.Header.Get("Accept") {
 	case "application/json":

@@ -12,7 +12,11 @@ func initializeRoutes() {
 	router.GET("/", showIndexPage)
 	router.POST("/login", performLogin)
 	router.POST("/register", register)
+	router.POST("/change", changeTerritory)
 	router.GET("/logout", logout)
+	router.GET("/survey", ensureLoggedIn(), showSurveyPage)
+	router.POST("/survey", ensureLoggedIn(), surveyComplete)
+	router.GET("/infographics", ensureLoggedIn(), showInfographicsPage)
 
 	router.GET("/object/:name", showObjectPage)
 
