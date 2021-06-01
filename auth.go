@@ -4,7 +4,6 @@ package main
 
 import (
 	"fmt"
-	"logger"
 	"net/http"
 	"strconv"
 	"strings"
@@ -27,7 +26,7 @@ func checkEmailValidation(email string) bool {
 	// Need to use Verify instead Sandbox in production
 	resp, err := qev.Sandbox(email) // Email address which need to be verified
 	if err != nil {
-		logger.Info.Printf("auth.go -> checkEmailValidation: error = %s; email = %s\n", err, email)
+		Info.Printf("auth.go -> checkEmailValidation: error = %s; email = %s\n", err, email)
 		return false
 	}
 	if resp.Result == "valid" {
@@ -129,7 +128,7 @@ func registerNewUser(email, username, password string) (string, string) {
 	usr := User{ID: uint64(len(AllUsersMap.Cache) + 1), Login: username, Email: email, Password: hPass, Token: token{userToken, false}}
 
 	if err := AllUsersMap.AddNewUser(usr); err != nil {
-		logger.Error.Println("auth.go -> registerNewUser -> AddNewUser: err =", err)
+		Error.Println("auth.go -> registerNewUser -> AddNewUser: err =", err)
 		return "", getLoc("internalError", Errors)
 	}
 

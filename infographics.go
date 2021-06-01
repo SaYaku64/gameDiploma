@@ -1,7 +1,6 @@
 package main
 
 import (
-	"logger"
 	"net/http"
 	"strconv"
 
@@ -57,7 +56,7 @@ func surveyComplete(c *gin.Context) {
 	sur := Survey{uint64(len(allSurveys.Cache) + 1), q1, q2, q3, q4, q5, q6, q7}
 
 	if err := allSurveys.AddNewSurvey(sur); err != nil {
-		logger.Error.Println("infographics.go -> surveyComplete -> AddNewSurvey: err =", err)
+		Error.Println("infographics.go -> surveyComplete -> AddNewSurvey: err =", err)
 		c.JSON(http.StatusOK, gin.H{
 			"error":   true,
 			"message": getLoc("internalError", Errors),
@@ -66,7 +65,7 @@ func surveyComplete(c *gin.Context) {
 	}
 	user, ok := GetCurrentUser(c)
 	if !ok {
-		logger.Error.Println("infographics.go -> surveyComplete -> GetCurrentUser: !ok")
+		Error.Println("infographics.go -> surveyComplete -> GetCurrentUser: !ok")
 		c.JSON(http.StatusOK, gin.H{
 			"error":   true,
 			"message": getLoc("unauth", Errors),
@@ -167,7 +166,7 @@ func infographicsShow(c *gin.Context) {
 	// 	}
 	// 	allSurveys.RenderWord(checkedStrings)
 	default:
-		logger.Error.Println("infographics.go -> infographicsShow: Unknown radio")
+		Error.Println("infographics.go -> infographicsShow: Unknown radio")
 		c.JSON(http.StatusOK, gin.H{
 			"error":   true,
 			"message": getLoc("internalError", Errors),

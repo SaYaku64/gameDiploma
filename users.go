@@ -1,7 +1,6 @@
 package main
 
 import (
-	logger "logger"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -131,7 +130,7 @@ func (au *AllUsers) GetUserByToken(token string) (User, bool) {
 func GetCurrentUser(c *gin.Context) (User, bool) {
 	token, err := c.Cookie("nules")
 	if err != nil {
-		logger.Error.Println("users.go -> GetCurrentUser -> Cookie: err =", err)
+		Error.Println("users.go -> GetCurrentUser -> Cookie: err =", err)
 		return User{}, false
 	}
 

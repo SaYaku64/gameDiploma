@@ -1,8 +1,6 @@
 package main
 
 import (
-	"logger"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -233,7 +231,7 @@ func getLocIndex() int {
 func getLoc(key string, fromMap map[string][]string) string {
 	valWOIndex, ok := fromMap[key]
 	if !ok {
-		logger.Error.Println("localization.go -> getLoc: !ok with key =", key)
+		Error.Println("localization.go -> getLoc: !ok with key =", key)
 		return ""
 	}
 	val := valWOIndex[getLocIndex()]

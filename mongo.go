@@ -3,13 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	logger "logger"
 )
 
 // UpdateTokenInDB - updates token in cache and DB
 func (au *AllUsers) UpdateTokenInDB(user User, tokenDB string, endless bool) bool {
 	if err := UpdateID(user.ID, obj{"$set": obj{"token": token{tokenDB, endless}}}); err != nil {
-		logger.Error.Println("users.go -> UpdateTokenInDB -> UpdateID: err =", err)
+		Error.Println("users.go -> UpdateTokenInDB -> UpdateID: err =", err)
 		return false
 	}
 	user.Token.Token = tokenDB
@@ -21,7 +20,7 @@ func (au *AllUsers) UpdateTokenInDB(user User, tokenDB string, endless bool) boo
 // UpdateBuildingsInDB - updates building in cache and DB
 func (au *AllUsers) UpdateBuildingsInDB(user User, dbb []DBBuilding) bool {
 	if err := UpdateID(user.ID, obj{"$set": obj{"fields": dbb}}); err != nil {
-		logger.Error.Println("users.go -> UpdateBuildingsInDB -> UpdateID: err =", err)
+		Error.Println("users.go -> UpdateBuildingsInDB -> UpdateID: err =", err)
 		return false
 	}
 	au.UpdateUserInMap(user)
@@ -35,7 +34,7 @@ func (au *AllUsers) AddNewUser(user User) error {
 	if err != nil {
 		return fmt.Errorf("mongo.go -> AddNewUser -> InsertOne: user = %+v; err = %s", user, err)
 	}
-	logger.Info.Println("mongo.go -> AddNewUser -> InsertOne: ", insertResult)
+	Info.Println("mongo.go -> AddNewUser -> InsertOne: ", insertResult)
 	user.Token.Endless = false
 	au.UpdateUserInMap(user)
 	return nil
@@ -48,7 +47,7 @@ func GetAllUsers() []User {
 
 	cur, err := Collection.Find(context.TODO(), obj{})
 	if err != nil {
-		logger.Error.Println(err)
+		Error.Println(err)
 	}
 
 	// Finding multiple documents returns a cursor
@@ -59,14 +58,14 @@ func GetAllUsers() []User {
 		var elem User
 		err := cur.Decode(&elem)
 		if err != nil {
-			logger.Error.Println(err)
+			Error.Println(err)
 		}
 
 		results = append(results, elem)
 	}
 
 	if err := cur.Err(); err != nil {
-		logger.Error.Println(err)
+		Error.Println(err)
 	}
 
 	// Closing the cursor
@@ -82,7 +81,7 @@ func GetAllSurveys() []Survey {
 
 	cur, err := CollectionInfo.Find(context.TODO(), obj{})
 	if err != nil {
-		logger.Error.Println(err)
+		Error.Println(err)
 	}
 
 	// Finding multiple documents returns a cursor
@@ -93,14 +92,14 @@ func GetAllSurveys() []Survey {
 		var elem Survey
 		err := cur.Decode(&elem)
 		if err != nil {
-			logger.Error.Println(err)
+			Error.Println(err)
 		}
 
 		results = append(results, elem)
 	}
 
 	if err := cur.Err(); err != nil {
-		logger.Error.Println(err)
+		Error.Println(err)
 	}
 
 	// Closing the cursor
@@ -118,7 +117,7 @@ func UpdateID(id uint64, query interface{}) error {
 	if err != nil {
 		return fmt.Errorf("mongo.go -> UpdateID -> UpdateOne: id = %d; query = %+v; err = %s", id, query, err)
 	}
-	logger.Info.Printf("mongo.go -> UpdateID -> UpdateOne: %+v; id = %d; query = %+v\n", updateResult, id, query)
+	Info.Printf("mongo.go -> UpdateID -> UpdateOne: %+v; id = %d; query = %+v\n", updateResult, id, query)
 	return nil
 }
 
@@ -129,7 +128,7 @@ func (as *AllSurveys) AddNewSurvey(sur Survey) error {
 	if err != nil {
 		return fmt.Errorf("mongo.go -> AddNewSurvey -> InsertOne: survey = %+v; err = %s", sur, err)
 	}
-	logger.Info.Println("mongo.go -> AddNewSurvey -> InsertOne: ", insertResult)
+	Info.Println("mongo.go -> AddNewSurvey -> InsertOne: ", insertResult)
 	as.UpdateSurveyInMap(sur)
 	return nil
 }
@@ -137,7 +136,7 @@ func (as *AllSurveys) AddNewSurvey(sur Survey) error {
 // UpdateAskedInDB - updates token in cache and DB
 func (au *AllUsers) UpdateAskedInDB(user User, asked bool) bool {
 	if err := UpdateID(user.ID, obj{"$set": obj{"asked": asked}}); err != nil {
-		logger.Error.Println("users.go -> UpdateAskedInDB -> UpdateID: err =", err)
+		Error.Println("users.go -> UpdateAskedInDB -> UpdateID: err =", err)
 		return false
 	}
 	user.Asked = asked

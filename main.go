@@ -4,7 +4,6 @@ package main
 
 import (
 	"context"
-	logger "logger"
 
 	"net/http"
 
@@ -46,7 +45,7 @@ func main() {
 
 	err := router.Run()
 	if err != nil {
-		logger.Warning.Println(err)
+		Warning.Println(err)
 	}
 
 	disconnDB(Client)
@@ -71,19 +70,19 @@ func connDB() mongo.Client {
 	// Creating DB Client
 	client, err := mongo.NewClient(options.Client().ApplyURI(mongoConn))
 	if err != nil {
-		logger.Warning.Println(err)
+		Warning.Println(err)
 	}
 
 	// Connect
 	err = client.Connect(context.TODO())
 	if err != nil {
-		logger.Warning.Println(err)
+		Warning.Println(err)
 	}
 
 	// Checking connection
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
-		logger.Warning.Println(err)
+		Warning.Println(err)
 	}
 
 	return *client
@@ -93,6 +92,6 @@ func disconnDB(client mongo.Client) {
 	// Disconnect
 	err := client.Disconnect(context.TODO())
 	if err != nil {
-		logger.Warning.Println(err)
+		Warning.Println(err)
 	}
 }
