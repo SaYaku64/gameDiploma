@@ -20,7 +20,7 @@ func generateSessionToken() string {
 
 func checkEmailValidation(email string) bool {
 
-	return true ////////
+	//return true ////////
 
 	qev := quickemailverification.CreateClient(quickEmail)
 	// Need to use Verify instead Sandbox in production
