@@ -1,0 +1,63 @@
+<script src="/static/infographics.js?v={{ .version }}"></script>
+<div>
+<h4>{{.filterCharts}}</h4>
+
+<div class="form-check form-check-inline">
+    <input class="form-check-input radios" type="radio" checked name="inlineRadioOptions" id="barRadio" value="barRadio">
+    <label class="form-check-label" for="barRadio">{{.bar}}</label>
+</div>
+<div class="form-check form-check-inline">
+    <input class="form-check-input radios" type="radio" name="inlineRadioOptions" id="pieRadio" value="pieRadio">
+    <label class="form-check-label" for="pieRadio">{{.pie}}</label>
+</div>
+<div class="form-check form-check-inline">
+    <input class="form-check-input radios" type="radio" disabled name="inlineRadioOptions" id="radarRadio" value="radarRadio">
+    <label class="form-check-label" for="radarRadio">{{.radar}} <small>*{{.tech}}*</small></label>
+</div>
+<div class="form-check form-check-inline">
+    <input class="form-check-input radios" type="radio" disabled name="inlineRadioOptions" id="wordRadio" value="wordRadio">
+    <label class="form-check-label" for="wordRadio">{{.word}} <small>*{{.tech}}*</small></label>
+</div>
+<br>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="changeCheck" id="changeCheck">
+    <label class="form-check-label" for="changeCheck">{{.infoFirstQ}}</label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="placedCheck" id="placedCheck">
+    <label class="form-check-label" for="placedCheck">{{.infoSecondQ}}</label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="check1" id="check1">
+    <label class="form-check-label" for="check1">{{.resultFirstQ}}</label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="check2" id="check2">
+    <label class="form-check-label" for="check2">{{.resultSecondQ}}</label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="check3" id="check3">
+    <label class="form-check-label" for="check3">{{.resultThirdQ}}</label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="check4" id="check4">
+    <label class="form-check-label" for="check4">{{.resultFourthQ}}</label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="check5" id="check5">
+    <label class="form-check-label" for="check5">{{.resultFifthQ}}</label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="check6" id="check6">
+    <label class="form-check-label" for="check6">{{.resultSixthQ}}</label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" checked type="checkbox" value="check7" id="check7">
+    <label class="form-check-label" for="check7">{{.resultSeventhQ}}</label>
+</div>
+<br>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <button class="btn btn-primary" type="button" id="infoFilters">{{.updateCharts}}</button>
+        <button class="btn btn-secondary" type="button" id="clearInfo">{{.clear}}</button>
+    </div>
+</div>

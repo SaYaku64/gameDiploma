@@ -54,6 +54,8 @@ $("document").ready(() => {
 
         var selY = $("#selectYear").val()
         var selU = $("#selectUniversity").val()
+        var selD = $("#selectDorm").val()
+        
 
         if (selY == "ch") {
             $("#selectYear").addClass("is-invalid")
@@ -97,6 +99,7 @@ $("document").ready(() => {
             chk6: chk6,
             chk7: chk7,
             chk8: chk8,
+            selD: selD,
         }, function(result){
             if (result.error != null) {
                 errorAlert(result.message);

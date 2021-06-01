@@ -32,7 +32,7 @@ var CollectionInfo = Client.Database(mongoDatabase).Collection(mongoCollInfograp
 func main() {
 
 	AllUsersMap.FillAllUsers()
-	SurveyMap.FillAllSurveys()
+	allSurveys.FillAllSurveys()
 
 	gin.SetMode(gin.ReleaseMode)
 

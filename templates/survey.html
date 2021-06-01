@@ -89,6 +89,17 @@
       <label class="form-check-label" for="chk8">{{.sixthQ5}}</label>
     </div>
   </div>
+  <div class="form-group">
+    <label for="selectDorm" class="h5">7. {{.seventhQ}}</label>
+    <select class="form-control" id="selectDorm">
+      <option value="ch" selected>{{.choose}}...</option>
+      <option value="dont">{{.seventhQ1}}</option>
+      <option value="ok">{{.seventhQ2}}</option>
+      <option value="small">{{.seventhQ3}}</option>
+      <option value="yes">{{.seventhQ4}}</option>
+      <option value="urgent">{{.seventhQ5}}</option>
+    </select>
+  </div>
   <button class="btn btn-primary" id="buttonSurvey">{{.send}}</button>
 </div>
 {{end}}

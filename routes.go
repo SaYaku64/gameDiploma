@@ -17,6 +17,10 @@ func initializeRoutes() {
 	router.GET("/survey", ensureLoggedIn(), showSurveyPage)
 	router.POST("/survey", ensureLoggedIn(), surveyComplete)
 	router.GET("/infographics", ensureLoggedIn(), showInfographicsPage)
+	//router.GET("/graph", ensureLoggedIn(), infographicsShow)
+	router.POST("/infographics", ensureLoggedIn(), infographicsShow)
+	router.GET("/clearInfo", ensureLoggedIn(), clearInfo)
+	//router.GET("/bar", ensureLoggedIn(), showBarPage)
 
 	router.GET("/object/:name", showObjectPage)
 

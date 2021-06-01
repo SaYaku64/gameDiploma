@@ -15,13 +15,13 @@
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Історія
+              {{.history}}
             </button>
           </h5>
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionTerritory">
           <div class="card-body">
-            29 грудня 1988 року ректор Української сільськогосподарської академії, академік Д. О. Мельничук підписав наказ № 410 «Про створення ботанічного саду Української сільськогосподарської академії», згідно з яким до нової структури увійшли землі Боярської лісової дослідної станції і сільгоспакадемії, зайняті плодовим садом, ділянки пасіки, навчально-дослідної лабораторії конярства. Статус Державного ботанічного сад отримав згідно з Постановою Ради Міністрів УРСР від 13.02.1989 р. № 53, а у 1992 році набув статусу Ботанічного саду загальнодержавного значення (Постанова Верховної Ради України від 16.06.1992 р. № 2457-ХІІ).
+            {{.hhistory}}
           </div>
         </div>
       </div>
@@ -30,13 +30,13 @@
         <div class="card-header" id="headingTwo">
           <h5 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Деталі
+              {{.details}}
             </button>
           </h5>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionTerritory">
           <div class="card-body">
-            Ботанічний сад складається з 6 наукових лабораторій: дендрології та лісової селекції, плодово-овочевих культур, квітникарства, екології рослин, зоології, зеленого будівництва. Загальна кількість видів, різновидів, гібридів, культиварів та форм які зростають на території Ботанічного саду становить 1499 таксономічних одиниці. З них колекція деревних рослин незахищеного ґрунту становить 604 колекційних одиниці (389 види, 4 різновиди, 33 гібриди, 2 форми та 176 культиварів), колекція лікарських рослин — 164 одиниці (163 види, 1 гібрид), колекція квітково-декоративних рослин відкритого ґрунту — 154 одиниці (95 види, 21 гібрид та 38 культиварів), колекція плодово-ягідних рослин — 155 одиниць (27 видів, 2 гібриди та 126 культиварів), колекція рослин захищеного ґрунту — 184 одиниці (162 види, 4 різновиди, 5 гібридів та 13 культиварів), колекція дикорослих та адвентивних трав'янистих рослин — 307 одиниць (306 видів, 1 гібрид), колекція мохоподібних рослин представлена 50 видами.
+            {{.ddetails}}
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@
         <div class="card-header" id="headingThree">
           <h5 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Фото
+              {{.photo}}
             </button>
           </h5>
         </div>
@@ -53,9 +53,9 @@
           <div class="card-body">
 
             <div class="d-flex bd-highlight">
-              <div class="p-2 flex-fill bd-highlight"><img src='/static/pics/botanicalGarden1.jpg' alt="Мова" id="localization" width="100%"></div>
-              <div class="p-2 flex-fill bd-highlight"><img src='/static/pics/botanicalGarden2.jpg' alt="Мова" id="localization" width="100%"></div>
-              <div class="p-2 flex-fill bd-highlight"><img src='/static/pics/botanicalGarden3.jpg' alt="Мова" id="localization" width="100%"></div>
+              <div class="p-2 flex-fill bd-highlight"><img src='/static/pics/{{.pphoto}}1.jpg' alt="Мова" id="localization" width="100%"></div>
+              <div class="p-2 flex-fill bd-highlight"><img src='/static/pics/{{.pphoto}}2.jpg' alt="Мова" id="localization" width="100%"></div>
+              <div class="p-2 flex-fill bd-highlight"><img src='/static/pics/{{.pphoto}}3.jpg' alt="Мова" id="localization" width="100%"></div>
             </div>
 
           </div>

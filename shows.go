@@ -17,10 +17,27 @@ func AddStandartGin(c *gin.Context, temp gin.H) gin.H {
 // GetStandartGin - used for adding standart gin values to all pages
 func GetStandartGin(c *gin.Context) gin.H {
 	standard := gin.H{
-		"version": generateSessionToken(),
-		"loc":     Localization,
-		"main":    getLoc("main", GinLabels),
-		"back":    getLoc("back", GinLabels),
+		"version":        generateSessionToken(),
+		"loc":            Localization,
+		"main":           getLoc("main", GinLabels),
+		"back":           getLoc("back", GinLabels),
+		"updateCharts":   getLoc("updateCharts", GinLabels),
+		"filterCharts":   getLoc("filterCharts", GinLabels),
+		"bar":            getLoc("bar", GinLabels),
+		"pie":            getLoc("pie", GinLabels),
+		"word":           getLoc("word", GinLabels),
+		"radar":          getLoc("radar", GinLabels),
+		"tech":           getLoc("tech", GinLabels),
+		"clear":          getLoc("clear", GinLabels),
+		"infoFirstQ":     getLoc("infoFirstQ", Phrases),
+		"infoSecondQ":    getLoc("infoSecondQ", Phrases),
+		"resultFirstQ":   getLoc("resultFirstQ", Phrases),
+		"resultSecondQ":  getLoc("resultSecondQ", Phrases),
+		"resultThirdQ":   getLoc("resultThirdQ", Phrases),
+		"resultFourthQ":  getLoc("resultFourthQ", Phrases),
+		"resultFifthQ":   getLoc("resultFifthQ", Phrases),
+		"resultSixthQ":   getLoc("resultSixthQ", Phrases),
+		"resultSeventhQ": getLoc("resultSeventhQ", Phrases),
 	}
 	if IsLoggedIn(c) {
 		standard["logout"] = getLoc("logout", GinLabels)
@@ -51,11 +68,21 @@ func showInfographicsPage(c *gin.Context) {
 		render(c, "infographics.html", gin.H{
 			"title": getLoc("infographicsTitle", Phrases),
 		})
-		SurveyMap.GenerateBarChart(c.Writer, c.Request)
-		httpserver(c.Writer, c.Request)
 	}
 	c.Redirect(http.StatusTemporaryRedirect, "/survey")
 }
+
+// // Shows infographics page
+// func showBarPage(c *gin.Context) {
+// 	if IsAsked(c) {
+// 		render(c, "infographics.html", gin.H{
+// 			"title": getLoc("infographicsTitle", Phrases),
+// 		})
+// 		allSurveys.GenerateBarChart(c.Writer, c.Request)
+// 		httpserver(c.Writer, c.Request)
+// 	}
+// 	c.Redirect(http.StatusTemporaryRedirect, "/survey")
+// }
 
 // Shows survey page
 func showSurveyPage(c *gin.Context) {
@@ -97,6 +124,12 @@ func showSurveyPage(c *gin.Context) {
 		"sixthQ3":   getLoc("sixthQ3", Phrases),
 		"sixthQ4":   getLoc("sixthQ4", Phrases),
 		"sixthQ5":   getLoc("sixthQ5", Phrases),
+		"seventhQ":  getLoc("seventhQ", Phrases),
+		"seventhQ1": getLoc("seventhQ1", Phrases),
+		"seventhQ2": getLoc("seventhQ2", Phrases),
+		"seventhQ3": getLoc("seventhQ3", Phrases),
+		"seventhQ4": getLoc("seventhQ4", Phrases),
+		"seventhQ5": getLoc("seventhQ5", Phrases),
 	})
 }
 
@@ -120,6 +153,12 @@ func showObjectPage(c *gin.Context) {
 		content := gin.H{
 			"title":       title,
 			"description": description,
+			"details":     getLoc("details", GinLabels),
+			"history":     getLoc("history", GinLabels),
+			"photo":       getLoc("photo", GinLabels),
+			"ddetails":    getLoc(bid, Details),
+			"hhistory":    getLoc(bid, History),
+			"pphoto":      bid,
 		}
 		allowed := GetAllowedBuildings(tid)
 		if len(allowed) > 0 && IsLoggedIn(c) {

@@ -65,6 +65,7 @@ type (
 		Question4 int     `json:"question4" bson:"question4"`
 		Question5 [3]bool `json:"question5" bson:"question5"`
 		Question6 [5]bool `json:"question6" bson:"question6"`
+		Question7 string  `json:"question7" bson:"question7"`
 	}
 
 	token struct {
