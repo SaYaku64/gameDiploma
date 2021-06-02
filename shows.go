@@ -38,6 +38,15 @@ func GetStandartGin(c *gin.Context) gin.H {
 		"resultFifthQ":   getLoc("resultFifthQ", Phrases),
 		"resultSixthQ":   getLoc("resultSixthQ", Phrases),
 		"resultSeventhQ": getLoc("resultSeventhQ", Phrases),
+		"help1":          getLoc("help1", Phrases),
+		"help2":          getLoc("help2", Phrases),
+		"help3":          getLoc("help3", Phrases),
+		"help4":          getLoc("help4", Phrases),
+		"help5":          getLoc("help5", Phrases),
+		"help6":          getLoc("help6", Phrases),
+		"help7":          getLoc("help7", Phrases),
+		"help8":          getLoc("help8", Phrases),
+		"help9":          getLoc("help9", Phrases),
 	}
 	if IsLoggedIn(c) {
 		standard["logout"] = getLoc("logout", GinLabels)

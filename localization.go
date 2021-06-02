@@ -138,6 +138,7 @@ var GinLabels = map[string][]string{
 	"details":      {"Деталі", "Details"},
 	"history":      {"Історія", "History"},
 	"photo":        {"Фото", "Photo"},
+	"help":         {"Допомога", "Help"},
 }
 
 // Errors - cache for error sentences
@@ -212,6 +213,15 @@ var Phrases = map[string][]string{
 	"resultFifthQ":   {"Результати на 5 питання", "Results for the 5 question"},
 	"resultSixthQ":   {"Результати на 6 питання", "Results for the 6 question"},
 	"resultSeventhQ": {"Результати на 7 питання", "Results for the 7 question"},
+	"help1":          {"Ви знаходитесь на головній сторінці проєкту ", "You are on the main page of project "},
+	"help2":          {"Я дуже вдячний, що Ви завітали, втім, до справи. Коротко про те, що Ви можете зробити:", "I am very grateful that you visited me, let's go. Briefly about what you can do:"},
+	"help3":          {"1. Ви можете натиснути на корпуси, або деякі інші об'єкти на території кампусу, щоб переглянути інформацію про них.", "1. You can click on buildings, or some other objects on campus, to view information about them."},
+	"help4":          {"2. Ви можете увійти або зареєструватись, що відкриє вам доступ до:", "2. You can log in or register, which will give you access to:"},
+	"help5":          {" - проходження опитування, спрямованого на покращення життя студентів", " - passing a survey, aimed at improving the lives of students"},
+	"help6":          {" - перегляду інфографіки та можливість змінювати її результати", " - view infographics and the ability to change its results"},
+	"help7":          {" - зміни об'єктів та перегляд інформації про них", "- changing the objects and viewing information about them"},
+	"help8":          {"Реєстрація, результати опитування та інше - ", "Registration, survey results and more - "},
+	"help9":          {" строго конфіденційні", " strictly confidential"},
 }
 
 func getLocalization(c *gin.Context) string {

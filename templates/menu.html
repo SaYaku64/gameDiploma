@@ -107,7 +107,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="infoModalLabel">Допомога</h5>
+          <h5 class="modal-title" id="infoModalLabel">{{.help}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -115,15 +115,15 @@
           <div class="modal-body">
             <div class="alert alert-light" role="alert">
               <h4 class="alert-heading">Вітаю вас!</h4>
-              <p>Ви знаходитесь на головній сторінці проєкту <b>NULESandbox</b>!</p>
-              <p>Я дуже вдячний, що Ви завітали, втім, до справи. Коротко про те, що Ви можете зробити:</p>
-              <p>1. Ви можете натиснути на корпуси, або деякі інші об'єкти на території кампусу, щоб переглянути інформацію про них.</p>
-              <p>2. Ви можете увійти або зареєструватись, що відкриє вам доступ до:</p>
-              <p> - проходження опитування, спрямованого на покращення життя студентів</p>
-              <p> - перегляду інфографіки та можливість змінювати її результати</p>
-              <p> - зміни об'єктів та перегляд інформації про них</p>
+              <p>{{.help1}}<b>NULESandbox</b>!</p>
+              <p>{{.help2}}</p>
+              <p>{{.help3}}</p>
+              <p>{{.help4}}</p>
+              <p>{{.help5}}</p>
+              <p>{{.help6}}</p>
+              <p>{{.help7}}</p>
               <hr>
-              <small>Реєстрація, результати опитування та інше - <b> строго конфіденційні</b>.</small>
+              <small>{{.help8}}<b>{{.help9}}</b>.</small>
             </div>
           </div>
       </div>
