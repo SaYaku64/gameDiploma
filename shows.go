@@ -29,6 +29,7 @@ func GetStandartGin(c *gin.Context) gin.H {
 		"radar":          getLoc("radar", GinLabels),
 		"tech":           getLoc("tech", GinLabels),
 		"clear":          getLoc("clear", GinLabels),
+		"help":           getLoc("help", GinLabels),
 		"infoFirstQ":     getLoc("infoFirstQ", Phrases),
 		"infoSecondQ":    getLoc("infoSecondQ", Phrases),
 		"resultFirstQ":   getLoc("resultFirstQ", Phrases),
