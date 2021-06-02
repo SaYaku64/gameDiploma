@@ -213,6 +213,7 @@ var Phrases = map[string][]string{
 	"resultFifthQ":   {"Результати на 5 питання", "Results for the 5 question"},
 	"resultSixthQ":   {"Результати на 6 питання", "Results for the 6 question"},
 	"resultSeventhQ": {"Результати на 7 питання", "Results for the 7 question"},
+	"helpTitle":      {"Вітаю вас!", "Welcome!"},
 	"help1":          {"Ви знаходитесь на головній сторінці проєкту ", "You are on the main page of project "},
 	"help2":          {"Я дуже вдячний, що Ви завітали, втім, до справи. Коротко про те, що Ви можете зробити:", "I am very grateful that you visited me, let's go. Briefly about what you can do:"},
 	"help3":          {"1. Ви можете натиснути на корпуси, або деякі інші об'єкти на території кампусу, щоб переглянути інформацію про них.", "1. You can click on buildings, or some other objects on campus, to view information about them."},

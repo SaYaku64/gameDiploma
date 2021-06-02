@@ -38,6 +38,7 @@ func GetStandartGin(c *gin.Context) gin.H {
 		"resultFifthQ":   getLoc("resultFifthQ", Phrases),
 		"resultSixthQ":   getLoc("resultSixthQ", Phrases),
 		"resultSeventhQ": getLoc("resultSeventhQ", Phrases),
+		"helpTitle":      getLoc("helpTitle", Phrases),
 		"help1":          getLoc("help1", Phrases),
 		"help2":          getLoc("help2", Phrases),
 		"help3":          getLoc("help3", Phrases),
